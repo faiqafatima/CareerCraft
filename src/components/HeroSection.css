@@ -1,0 +1,81 @@
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 60px;
+  background: linear-gradient(135deg, #f1fff3, #ffffff);
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.hero-left {
+  flex: 1;
+  min-width: 300px;
+}
+
+.hero-left h1 {
+  font-size: 48px;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+.hero-left h1 span {
+  color: #28a745; /* green */
+}
+
+.hero-left p {
+  font-size: 18px;
+  color: #444;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.get-started {
+  background-color: #28a745; /* green */
+  color: white;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.get-started:hover {
+  background-color: #1e7e34;
+}
+
+.explore-features {
+  background-color: transparent;
+  border: 2px solid #28a745;
+  color: #28a745;
+  padding: 11px 26px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.explore-features:hover {
+  background-color: #28a745;
+  color: white;
+}
+
+.hero-right {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-right img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
