@@ -1,0 +1,90 @@
+/* ======== Layout ======== */
+.cv-preview-page {
+  background-color: #ffffff;
+  min-height: 100vh;
+  padding: 60px 20px;
+  color: #000000;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.cv-preview-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 30px 40px;
+  background-color: #fff;
+  color: #000;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* ======== Name/Header ======== */
+.name {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+/* ======== Photo Section ======== */
+.photo-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.photo-section img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* ======== Text Content ======== */
+.cv-preview-container p {
+  margin: 5px 0;
+  font-size: 14px;
+  line-height: 1.6; /* ✅ improved for readability */
+}
+
+/* ======== Section Headings ======== */
+.cv-preview-container h3 {
+  margin-top: 30px;
+  font-size: 16px;
+  font-weight: 700;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+/* ======== Lists ======== */
+.cv-preview-container ul {
+  margin: 10px 0 0 20px;
+  font-size: 14px;
+}
+
+.cv-preview-container ul li {
+  margin-bottom: 6px;
+  line-height: 1.6; /* ✅ match paragraph line-height */
+}
+
+/* ======== Buttons ======== */
+.cv-preview-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  gap: 16px;
+}
+
+.cv-preview-actions button {
+  background-color: #22c55e;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.cv-preview-actions button:hover {
+  background-color: #16a34a;
+}

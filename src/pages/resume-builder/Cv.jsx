@@ -1,26 +1,32 @@
-// src/pages/Cv.jsx
-import React from 'react';
+// src/pages/resume-builder/Cv.jsx
+import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Cv.css';
 
 const templates = [
-  { id: 1, name: 'Modern', description: 'Clean, modern layout' },
   {
-    id: 2,
-    name: 'Classic',
-    description: 'Traditional format with bold headings',
+    id: 'pro',
+    name: 'Professional CV',
+    description: 'Ideal for jobs, internships, and business roles.',
   },
-  { id: 3, name: 'Creative', description: 'Stylish and artistic design' },
-  { id: 4, name: 'Minimal', description: 'Simple and elegant layout' },
-  { id: 5, name: 'Professional', description: 'Corporate-style formal layout' },
+  {
+    id: 'personal',
+    name: 'Personal/Student CV',
+    description: 'Great for beginners, part-time, or student jobs.',
+  },
 ];
 
 const Cv = () => {
   const navigate = useNavigate();
+  const templateRef = useRef(null);
 
   const handleTemplateClick = (id) => {
     console.log('Template selected:', id);
-    navigate('/resume-builder/create');
+    navigate(`/resume-builder/create?template=${id}`);
+  };
+
+  const scrollToTemplates = () => {
+    templateRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -28,12 +34,12 @@ const Cv = () => {
       <div className="hero">
         <h1>Build Your Resume</h1>
         <p>Create professional CVs with AI in minutes.</p>
-        <button onClick={() => navigate('/resume-builder/create')}>
+        <button onClick={scrollToTemplates}>
           Create Resume with AI
         </button>
       </div>
 
-      <div className="template-section">
+      <div className="template-section" ref={templateRef}>
         <h2>Choose a Template</h2>
         <div className="template-grid">
           {templates.map((template) => (
