@@ -1,35 +1,105 @@
 /* ======== Layout ======== */
 .cv-preview-page {
-  background-color: #ffffff;
+  background-color: #f0fdf4;
   min-height: 100vh;
   padding: 60px 20px;
   color: #000000;
   font-family: 'Segoe UI', Arial, sans-serif;
 }
 
+/* ======== Header ======== */
+.cv-preview-header {
+  max-width: 800px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.cv-preview-header h1 {
+  color: #22c55e;
+  font-size: 24px;
+  margin: 0;
+}
+
+.back-button {
+  background-color: #22c55e;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #16a34a;
+}
+
+/* ======== Status Messages ======== */
+.download-status {
+  max-width: 800px;
+  margin: 0 auto 20px;
+  background-color: #dcfce7;
+  color: #166534;
+  padding: 12px;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+  border: 1px solid #bbf7d0;
+}
+
+/* ======== Loading ======== */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 20px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e5e7eb;
+  border-top: 4px solid #22c55e;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ======== Main Container ======== */
 .cv-preview-container {
   max-width: 800px;
   margin: auto;
-  padding: 30px 40px;
+  padding: 40px;
   background-color: #fff;
   color: #000;
   word-wrap: break-word;
   overflow-wrap: anywhere;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  line-height: 1.6;
 }
 
-/* ======== Name/Header ======== */
-.name {
-  text-align: center;
-  font-size: 28px;
-  margin-bottom: 10px;
-  font-weight: 600;
-}
-
-/* ======== Photo Section ======== */
-.photo-section {
+/* ======== Header Section ======== */
+.cv-header {
   display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+  gap: 30px;
+  margin-bottom: 40px;
+  padding-bottom: 30px;
+  border-bottom: 2px solid #22c55e;
+}
+
+.photo-section {
+  flex-shrink: 0;
 }
 
 .photo-section img {
@@ -37,33 +107,151 @@
   height: 120px;
   object-fit: cover;
   border-radius: 10px;
+  border: 3px solid #22c55e;
 }
 
-/* ======== Text Content ======== */
-.cv-preview-container p {
+.header-content {
+  flex: 1;
+}
+
+.name {
+  font-size: 32px;
+  font-weight: 700;
+  color: #22c55e;
+  margin: 0 0 20px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.contact-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.contact-info p {
   margin: 5px 0;
   font-size: 14px;
-  line-height: 1.6; /* ✅ improved for readability */
+  color: #374151;
 }
 
-/* ======== Section Headings ======== */
-.cv-preview-container h3 {
-  margin-top: 30px;
-  font-size: 16px;
+.contact-info strong {
+  color: #22c55e;
+}
+
+/* ======== Sections ======== */
+.cv-section {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  font-size: 20px;
   font-weight: 700;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 5px;
+  color: #22c55e;
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #dcfce7;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-/* ======== Lists ======== */
-.cv-preview-container ul {
-  margin: 10px 0 0 20px;
+.section-content {
+  padding-left: 20px;
+}
+
+/* ======== Education Items ======== */
+.education-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f9fafb;
+  border-radius: 6px;
+  border-left: 4px solid #22c55e;
+}
+
+.education-item h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 5px 0;
+}
+
+.education-item .institution {
   font-size: 14px;
+  color: #6b7280;
+  margin: 0 0 5px 0;
 }
 
-.cv-preview-container ul li {
-  margin-bottom: 6px;
-  line-height: 1.6; /* ✅ match paragraph line-height */
+.education-item .year {
+  font-size: 12px;
+  color: #22c55e;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* ======== Experience Items ======== */
+.experience-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f9fafb;
+  border-radius: 6px;
+  border-left: 4px solid #22c55e;
+}
+
+.experience-item h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 5px 0;
+}
+
+.experience-item .company {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0 0 5px 0;
+}
+
+.experience-item .duration {
+  font-size: 12px;
+  color: #22c55e;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* ======== Project Items ======== */
+.project-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f9fafb;
+  border-radius: 6px;
+  border-left: 4px solid #22c55e;
+}
+
+.project-item h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 8px 0;
+}
+
+.project-item .description {
+  font-size: 14px;
+  color: #374151;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ======== Links ======== */
+.links {
+  font-size: 14px;
+  color: #374151;
+  word-break: break-all;
+}
+
+/* ======== Additional Info ======== */
+.additional-info {
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.6;
 }
 
 /* ======== Buttons ======== */
@@ -74,17 +262,63 @@
   gap: 16px;
 }
 
-.cv-preview-actions button {
+.download-btn {
   background-color: #22c55e;
   color: white;
   border: none;
-  padding: 10px 24px;
+  padding: 12px 24px;
   border-radius: 6px;
   cursor: pointer;
   font-size: 16px;
+  font-weight: 600;
   transition: background-color 0.3s ease;
 }
 
-.cv-preview-actions button:hover {
+.download-btn:hover {
   background-color: #16a34a;
+}
+
+.pdf-btn {
+  background-color: #22c55e;
+}
+
+.word-btn {
+  background-color: #16a34a;
+}
+
+/* ======== Template Variations ======== */
+.pro-template {
+  font-family: 'Georgia', serif;
+}
+
+.personal-template {
+  font-family: 'Arial', sans-serif;
+}
+
+/* ======== Responsive Design ======== */
+@media (max-width: 768px) {
+  .cv-preview-container {
+    padding: 20px;
+    margin: 10px;
+  }
+  
+  .cv-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+  
+  .contact-info {
+    grid-template-columns: 1fr;
+  }
+  
+  .cv-preview-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cv-preview-header {
+    flex-direction: column;
+    text-align: center;
+  }
 }

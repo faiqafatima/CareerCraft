@@ -9,6 +9,8 @@ import Cv from './pages/resume-builder/Cv';
 import ResumeForm from './pages/resume-builder/ResumeForm';
 import CvPreview from './pages/resume-builder/CvPreview'; // ✅ Import Preview
 
+import InterviewPractice from './pages/interview/InterviewPractice'; // ✅ Import Interview Page
+
 import './App.css';
 
 function App() {
@@ -44,6 +46,14 @@ function App() {
         element={
           <Layout>
             <CvPreview />
+          </Layout>
+        }
+      />
+      <Route
+        path="/interview-practice" // ✅ New AI Interview Practice Route
+        element={
+          <Layout>
+            <InterviewPractice />
           </Layout>
         }
       />

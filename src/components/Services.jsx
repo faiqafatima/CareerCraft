@@ -7,12 +7,13 @@ const services = [
     icon: '📄',
     title: 'Resume Builder',
     description: 'Create professional resumes with AI-powered suggestions',
-    link: '/resume-builder', // ✅ fixed link here
+    link: '/resume-builder',
   },
   {
     icon: '🎤',
     title: 'AI Interview Practice',
     description: 'Practice interviews with our intelligent AI coach',
+    link: '/interview-practice', // ✅ Fixed: added missing link
   },
   {
     icon: '🔍',
