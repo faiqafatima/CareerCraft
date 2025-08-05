@@ -1,14 +1,5 @@
-const Interview = async (role) => {
+const Interview = async (prompt) => {
   const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-
-  // Check for farewell
-  const farewellRegex = /\b(bye|goodbye|see you|exit|quit|thanks|thank you)\b/i;
-  let prompt;
-  if (farewellRegex.test(role)) {
-    prompt = `The user said '${role}'. End the interview politely and do not ask further questions.`;
-  } else {
-    prompt = `Act as an interviewer for the role of ${role}. Ask me interview questions one by one and wait for my answer after each question. Start with the first question or continue the interview.`;
-  }
 
   try {
     const response = await fetch(

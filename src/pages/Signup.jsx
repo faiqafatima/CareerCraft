@@ -136,11 +136,13 @@ const Signup = () => {
             <div className="auth-alt">
               <p>Or continue with</p>
               <div className="auth-buttons">
-                <button type="button" className="google-btn">
+                <button type="button" className="google-btn" disabled style={{ opacity: 0.6, cursor: 'not-allowed' }}>
                   <img src={googleIcon} alt="Google" className="btn-icon" />
-                  Google
+                  Google (Coming Soon)
                 </button>
-                <button type="button" className="fb-btn">Facebook</button>
+                <button type="button" className="fb-btn" disabled style={{ opacity: 0.6, cursor: 'not-allowed' }}>
+                  Facebook (Coming Soon)
+                </button>
               </div>
             </div>
 

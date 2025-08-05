@@ -6,6 +6,7 @@ import {
   faTwitter,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -21,8 +22,9 @@ const Footer = () => {
         <div className="footer-column">
           <h3>Quick Links</h3>
           <ul>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><Link to="/about">About Us</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
+            <li><Link to="/feedback">Feedback</Link></li>
             <li><a href="#">Terms of Service</a></li>
             <li><a href="#">Privacy Policy</a></li>
           </ul>
@@ -31,9 +33,9 @@ const Footer = () => {
         <div className="footer-column">
           <h3>Follow Us</h3>
           <div className="footer-icons">
-            <a href="#"><FontAwesomeIcon icon={faLinkedin} /></a>
-            <a href="#"><FontAwesomeIcon icon={faTwitter} /></a>
-            <a href="#"><FontAwesomeIcon icon={faInstagram} /></a>
+            <a href="#" title="LinkedIn (Coming Soon)"><FontAwesomeIcon icon={faLinkedin} /></a>
+            <a href="#" title="Twitter (Coming Soon)"><FontAwesomeIcon icon={faTwitter} /></a>
+            <a href="https://instagram.com/faiqarana._" target="_blank" rel="noopener noreferrer" title="Instagram"><FontAwesomeIcon icon={faInstagram} /></a>
           </div>
         </div>
       </div>

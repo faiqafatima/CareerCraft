@@ -1,12 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Interview from '../../api/Interview';
+import useAuthStore from '../../store/authStore';
 import './InterviewPractice.css';
 
 const InterviewPractice = () => {
+  const navigate = useNavigate();
+  const { isLoggedIn } = useAuthStore();
+  
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (!isLoggedIn) {
+      alert('Please log in to access Interview Practice.');
+      navigate('/login');
+    }
+  }, [isLoggedIn, navigate]);
+
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  // Don't render if not logged in
+  if (!isLoggedIn) {
+    return null;
+  }
 
   const handleInterview = async () => {
     if (!input.trim()) {
@@ -24,7 +42,14 @@ const InterviewPractice = () => {
     setMessages((prev) => [...prev, { text: input, type: 'user' }]);
 
     try {
-      const aiResponse = await Interview(input);
+      let prompt;
+      // If user says bye, end politely
+      if (/\b(bye|goodbye|see you|exit|quit|thanks|thank you)\b/i.test(input)) {
+        prompt = `The user said '${input}'. End the interview politely and do not ask further questions.`;
+      } else {
+        prompt = `Act as an interviewer for the role of ${input}. Ask me interview questions one by one and wait for my answer after each question. Start with the first question or continue the interview.`;
+      }
+      const aiResponse = await Interview(prompt);
       setMessages((prev) => [...prev, { text: aiResponse, type: 'ai' }]);
     } catch {
       setMessages((prev) => [
@@ -41,11 +66,7 @@ const InterviewPractice = () => {
   };
 
   const handleClearChat = () => {
-    if (
-      window.confirm(
-        'Are you sure you want to clear the chat? This cannot be undone.'
-      )
-    ) {
+    if (window.confirm('Are you sure you want to clear the chat? This cannot be undone.')) {
       setMessages([]);
     }
   };
@@ -82,9 +103,7 @@ const InterviewPractice = () => {
                 marginBottom: '10px',
               }}
             >
-              <div
-                style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
-              >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <div className="typing-indicator">
                   <span></span>
                   <span></span>
@@ -115,7 +134,9 @@ const InterviewPractice = () => {
             maxLength={500}
           />
           <div className="input-footer">
-            <span className="char-count">{input.length}/500 characters</span>
+            <span className="char-count">
+              {input.length}/500 characters
+            </span>
             {error && <div className="error">{error}</div>}
           </div>
         </div>
