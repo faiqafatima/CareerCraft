@@ -1,9 +1,8 @@
-/* Services.css */
-
 .services-section {
   padding: 3rem 1rem;
-  background-color: #f9f9f9;
+  background: linear-gradient(135deg, #163235, #106967);
   text-align: center;
+  color: #ffffff;
 }
 
 .services-heading {
@@ -13,15 +12,26 @@
 }
 
 .services-subheading {
-  color: #555;
+  color: #d1d5db;
   margin-bottom: 2rem;
 }
 
+.login-warning {
+  background: #dcfce7;
+  color: #166534;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 2rem;
+  border: 1px solid #22c55e;
+}
+
+/* ✅ FLEX layout to prevent stretch and fix 2 cards per row */
 .services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2rem;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 2rem;
   padding: 0 1rem;
 }
 
@@ -29,15 +39,40 @@
   background-color: white;
   border-radius: 1rem;
   padding: 1.5rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #000000;
+  width: 350px; /* ✅ fixed width */
+  min-height: 430px; /* optional: adjust height if needed */
 }
 
 .service-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
+  box-shadow: 0 0 15px 2px gold; /* golden glow effect */
 }
 
-.service-icon {
-  font-size: 2rem;
+.service-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
   margin-bottom: 1rem;
+}
+
+.icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.login-badge {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background: #fef3c7;
+  color: #92400e;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
 }

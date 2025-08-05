@@ -1,81 +1,161 @@
 .hero {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 80px 60px;
-  background: linear-gradient(135deg, #f1fff3, #ffffff);
-  flex-wrap: wrap;
-  gap: 40px;
+  align-items: center;
+  padding: 5rem 8%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #163235, #106967);
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+}
+
+/* Soft green glow animation */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  left: -30%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(79, 188, 156, 0.3),
+    transparent 70%
+  );
+  z-index: 0;
+  animation: glowPulse 14s ease-in-out infinite;
+  filter: blur(90px);
+  opacity: 0.5;
+}
+
+/* ✨ Golden Glow behind the image */
+.hero-right::before {
+  content: '';
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.3), transparent 70%);
+  top: 50%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  filter: blur(90px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.9;
+  }
 }
 
 .hero-left {
+  z-index: 2;
   flex: 1;
-  min-width: 300px;
+  max-width: 50%;
 }
 
 .hero-left h1 {
-  font-size: 48px;
-  color: #222;
-  margin-bottom: 20px;
+  font-size: 3.5rem;
+  margin-bottom: 1.2rem;
+  animation: fadeIn 1.2s ease-in-out forwards;
 }
 
-.hero-left h1 span {
-  color: #28a745; /* green */
+.white-text {
+  color: #ffffff;
+}
+
+.green-text {
+  color: #22c55e;
 }
 
 .hero-left p {
-  font-size: 18px;
-  color: #444;
-  margin-bottom: 30px;
-  line-height: 1.6;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #dceeea;
+  margin-bottom: 2.2rem;
+  animation: fadeIn 1.8s ease-in-out forwards;
 }
 
 .hero-buttons {
   display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.get-started,
+.explore-features {
+  padding: 0.9rem 2.2rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .get-started {
-  background-color: #28a745; /* green */
-  color: white;
-  padding: 12px 28px;
+  background-color: #4fbc9c;
+  color: #0a0a0a;
+  box-shadow: 0 0 20px #4fbc9c80;
   border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
 }
 
 .get-started:hover {
-  background-color: #1e7e34;
+  background-color: #32bf7a;
+  box-shadow: 0 0 25px #32bf7a;
 }
 
 .explore-features {
-  background-color: transparent;
-  border: 2px solid #28a745;
-  color: #28a745;
-  padding: 11px 26px;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.07);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
 }
 
 .explore-features:hover {
-  background-color: #28a745;
-  color: white;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #0a0a0a;
 }
 
 .hero-right {
   flex: 1;
-  min-width: 300px;
+  z-index: 2;
   display: flex;
   justify-content: center;
+  position: relative; /* Required for glow positioning */
 }
 
 .hero-right img {
+  width: 480px;
   max-width: 100%;
-  height: auto;
-  border-radius: 12px;
+  animation: float 6s ease-in-out infinite;
+  filter: drop-shadow(0 0 16px rgba(79, 188, 156, 0.3));
+  border-radius: 1.5rem;
+  z-index: 2;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

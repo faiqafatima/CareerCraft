@@ -5,8 +5,8 @@ const HeroSection = () => {
   return (
     <section className="hero">
       <div className="hero-left">
-        <h1>
-          Build Your Career with <span>AI</span>
+        <h1>  <span className="white-text">Build Your Career with </span>
+  <span className="green-text">AI</span>
         </h1>
         <p>
           Leverage the power of artificial intelligence to create standout resumes,
@@ -19,7 +19,7 @@ const HeroSection = () => {
       </div>
       <div className="hero-right">
         <img
-          src="src/assets/hero-led.png" // Replace with your image path if needed
+          src="src/assets/hero.jpg"
           alt="AI Career Illustration"
         />
       </div>
@@ -28,3 +28,4 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+

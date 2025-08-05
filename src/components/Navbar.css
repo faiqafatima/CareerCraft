@@ -3,9 +3,16 @@
   justify-content: space-between;
   align-items: center;
   padding: 18px 50px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background: linear-gradient(
+    to right,
+    #163235,
+    #106967
+  ); /* Emerald gradient */
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
   font-family: 'Avenir', sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
 .navbar-left {
@@ -14,15 +21,17 @@
   gap: 12px;
 }
 
+/* ✅ Logo Circle – matches navbar background (no ugly glow) */
 .logo-circle {
   width: 35px;
   height: 35px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid #28a745;
+  border: 2px solid #163235; /* Matches navbar color */
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 0 6px rgba(22, 50, 53, 0.4); /* Subtle inner glow */
 }
 
 .logo-circle img {
@@ -32,10 +41,12 @@
   border-radius: 50%;
 }
 
+/* ✅ Brand Text – Classy soft green with glow */
 .navbar-brand {
   font-size: 26px;
   font-weight: bold;
-  color: #222;
+  color: #4fbc9c; /* Soft mint green */
+  text-shadow: 0 0 4px #4fbc9c80, 0 0 8px #10696770;
 }
 
 .navbar-right {
@@ -60,37 +71,42 @@
 .navbar-links li a,
 .dropdown-label {
   text-decoration: none;
-  color: #333;
+  color: #f0fdfa; /* Pale aqua */
   font-size: 15.5px;
-  font-weight: bold; /* ✅ made nav links bold */
-  transition: color 0.3s;
+  font-weight: bold;
+  transition: all 0.3s;
   cursor: pointer;
 }
 
 .navbar-links li a:hover,
 .dropdown-label:hover {
-  color: #22C55E; /* ✅ changed hover color to green */
+  color: #4fbc9c; /* Hover with green glow */
+  text-shadow: 0 0 6px #4fbc9c;
 }
 
 .register-btn {
   padding: 10px 22px;
-  background-color: #28a745;
-  color: white;
+  background-color: #4fbc9c; /* Mint green */
+  color: #ffffff;
   border: none;
   border-radius: 6px;
   font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  box-shadow: 0 0 12px #4fbc9c80;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .register-btn:hover {
-  background-color: #218838;
+  background-color: #32bf7a;
+  transform: scale(1.05);
 }
 
 .welcome-msg {
   margin-right: 1rem;
   font-weight: bold;
-  color: #333;
+  color: #4fbc9c;
+  text-shadow: 0 0 3px #4fbc9c80;
 }
 
 /* Dropdown Styles */
@@ -98,12 +114,12 @@
   position: absolute;
   top: 35px;
   left: 0;
-  background-color: white;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  background: #0f2d2b;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
   padding: 10px 0;
   z-index: 10;
-  min-width: 170px;
+  min-width: 180px;
 }
 
 .dropdown-menu li {
@@ -112,10 +128,11 @@
 }
 
 .dropdown-menu li a {
-  color: #333;
+  color: #f0fdfa;
   text-decoration: none;
+  font-weight: 500;
 }
 
 .dropdown-menu li:hover {
-  background-color: #f2f2f2;
+  background-color: rgba(79, 188, 156, 0.2);
 }

@@ -2,8 +2,6 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import Layout from './components/Layout';
-import HeroSection from './components/HeroSection';
-import Services from './components/Services';
 
 import Cv from './pages/resume-builder/Cv';
 import ResumeForm from './pages/resume-builder/ResumeForm';
@@ -17,6 +15,7 @@ import JobSearch from './pages/JobSearch';
 import CareerGuidance from './pages/CareerGuidance';
 import Contact from './pages/Contact';
 import Feedback from './pages/Feedback';
+import Home from './pages/Home'; // ✅ New import
 
 import './App.css';
 
@@ -27,8 +26,7 @@ function App() {
         path="/"
         element={
           <Layout>
-            <HeroSection />
-            <Services />
+            <Home /> {/* ✅ Clean homepage route */}
           </Layout>
         }
       />

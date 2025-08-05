@@ -1,6 +1,6 @@
 .footer {
-  background-color: #003d1f; /* Darker green */
-  color: #ffffff;
+  background: linear-gradient(to right, #163235, #106967); /* Emerald gradient */
+  color: #f0fdfa;
   padding: 2rem 1rem;
   text-align: center;
   font-family: 'Poppins', sans-serif;
@@ -20,7 +20,7 @@
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 0.8rem;
-  color: #b2f2d2;
+  color: #a8f5de;
 }
 
 .footer-column ul {
@@ -34,31 +34,32 @@
 
 .footer-column a {
   text-decoration: none;
-  color: #e1fcef;
+  color: #d8fef6;
   font-size: 0.95rem;
-  transition: color 0.2s;
+  transition: color 0.2s ease;
 }
 
 .footer-column a:hover {
-  color: #a2e4c5;
+  color: #4fbc9c; /* Mint green hover */
 }
 
 .footer-brand {
   font-weight: 700;
   font-size: 1.5rem;
-  color: #00ff99;
+  color: #4fbc9c; /* Brand mint green */
+  text-shadow: 0 0 4px #4fbc9c50;
 }
 
 .footer-tagline {
   font-size: 0.95rem;
   margin-top: 0.5rem;
-  color: #d6fbe9;
+  color: #c8f4eb;
 }
 
 .footer-bottom {
   margin-top: 2rem;
   font-size: 0.8rem;
-  color: #ccc;
+  color: #b3e9d8;
 }
 
 /* Icons */
@@ -70,13 +71,14 @@
 }
 
 .footer-icons a {
-  color: #ffffff;
+  color: #e3fefb;
   font-size: 1.2rem;
-  transition: color 0.2s;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .footer-icons a:hover {
-  color: #00ff99;
+  color: #4fbc9c;
+  transform: scale(1.1);
 }
 
 /* Responsive */
@@ -91,4 +93,3 @@
     justify-content: flex-start;
   }
 }
-

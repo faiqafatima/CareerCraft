@@ -33,39 +33,23 @@ const Navbar = () => {
 
       <div className="navbar-right">
         <ul className="navbar-links">
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About Us</Link>
-          </li>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About Us</Link></li>
 
           <li className="dropdown" onClick={toggleServicesDropdown}>
             <span className="dropdown-label">Services ▾</span>
             {servicesOpen && (
               <ul className="dropdown-menu">
-                <li>
-                  <Link to="/resume-builder">📝 Resume Builder</Link>
-                </li>
-                <li>
-                  <Link to="/interview-practice">🎤 AI Interview Practice</Link>
-                </li>
-                <li>
-                  <Link to="/job-search">🔍 Job Search</Link>
-                </li>
-                <li>
-                  <Link to="/career-guidance">🎯 Career Guidance</Link>
-                </li>
+                <li><Link to="/resume-builder">📝 Resume Builder</Link></li>
+                <li><Link to="/interview-practice">🎤 AI Interview Practice</Link></li>
+                <li><Link to="/job-search">🔍 Job Search</Link></li>
+                <li><Link to="/career-guidance">🎯 Career Guidance</Link></li>
               </ul>
             )}
           </li>
 
-          <li>
-            <Link to="/feedback">Feedback</Link>
-          </li>
-          <li>
-            <Link to="/contact">Contact Us</Link>
-          </li>
+          <li><Link to="/feedback">Feedback</Link></li>
+          <li><Link to="/contact">Contact Us</Link></li>
         </ul>
 
         {isLoggedIn ? (
@@ -73,14 +57,10 @@ const Navbar = () => {
             <span className="welcome-msg">
               Welcome, {user?.name?.split(' ')[0] || user?.email}!
             </span>
-            <button className="register-btn" onClick={handleLogout}>
-              Logout
-            </button>
+            <button className="register-btn" onClick={handleLogout}>Logout</button>
           </>
         ) : (
-          <button className="register-btn" onClick={handleRegister}>
-            Register Now
-          </button>
+          <button className="register-btn" onClick={handleRegister}>Register Now</button>
         )}
       </div>
     </nav>
