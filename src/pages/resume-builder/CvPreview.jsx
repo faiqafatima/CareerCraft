@@ -12,7 +12,7 @@ const CvPreview = () => {
   const location = useLocation();
 
   const queryParams = new URLSearchParams(location.search);
-  const template = queryParams.get('template') || 'pro'; // Now we'll actually use this
+  const template = queryParams.get('template') || 'pro';
 
   useEffect(() => {
     const data = localStorage.getItem('resumeData');
@@ -27,11 +27,8 @@ const CvPreview = () => {
 
   const handlePDFDownload = async () => {
     if (!cvRef.current) return;
-
     if (!window.confirm('Download this resume as PDF?')) return;
-
     setDownloadStatus('Generating PDF...');
-    
     try {
       const opt = {
         margin: 0.5,
@@ -40,7 +37,6 @@ const CvPreview = () => {
         html2canvas: { scale: 2 },
         jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
       };
-
       await html2pdf().set(opt).from(cvRef.current).save();
       setDownloadStatus('PDF downloaded successfully!');
       setTimeout(() => setDownloadStatus(''), 3000);
@@ -52,11 +48,8 @@ const CvPreview = () => {
 
   const handleWordDownload = async () => {
     if (!cvRef.current) return;
-
     if (!window.confirm('Download this resume as Word document?')) return;
-
     setDownloadStatus('Generating Word document...');
-    
     try {
       const content = cvRef.current.innerHTML;
       const blob = new Blob(
@@ -65,14 +58,12 @@ const CvPreview = () => {
         ],
         { type: 'application/msword' }
       );
-
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
       link.download = `${resumeData.name.replace(/\s+/g, '_')}_resume.doc`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      
       setDownloadStatus('Word document downloaded successfully!');
       setTimeout(() => setDownloadStatus(''), 3000);
     } catch (error) {
@@ -116,7 +107,7 @@ const CvPreview = () => {
       )}
 
       <div
-        className={`cv-preview-container ${template === 'pro' ? 'pro-template' : 'personal-template'}`}
+        className={`cv-preview-container black-text-preview`}
         ref={cvRef}
       >
         {/* Header Section */}
@@ -126,7 +117,6 @@ const CvPreview = () => {
               <img src={resumeData.photo} alt="Profile" />
             </div>
           )}
-          
           <div className="header-content">
             <h1 className="name">{resumeData.name}</h1>
             <div className="contact-info">

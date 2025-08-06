@@ -6,9 +6,9 @@ body {
 
 /* Page background */
 .resume-page {
-  background-color: #F0FDF4;
+  background: linear-gradient(135deg, #163235 0%, #106967 100%);
   min-height: 100vh;
-  padding: 60px 20px; /* Add space below navbar */
+  padding: 60px 20px;
 }
 
 /* Card-style form */
@@ -17,8 +17,8 @@ body {
   margin: auto;
   padding: 25px;
   background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+  border-radius: 16px;
+  box-shadow: 0 0 24px #22c55e22;
 }
 
 .resume-form h2 {

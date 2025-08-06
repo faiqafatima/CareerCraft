@@ -1,6 +1,6 @@
 /* ======== Layout ======== */
 .cv-preview-page {
-  background-color: #f0fdf4;
+  background: linear-gradient(135deg, #163235 0%, #106967 100%);
   min-height: 100vh;
   padding: 60px 20px;
   color: #000000;
@@ -84,8 +84,8 @@
   color: #000;
   word-wrap: break-word;
   overflow-wrap: anywhere;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px #22c55e22;
   line-height: 1.6;
 }
 
