@@ -9,20 +9,23 @@ const CvPreview = () => {
   const [downloadStatus, setDownloadStatus] = useState('');
   const cvRef = useRef();
   const navigate = useNavigate();
+  // eslint-disable-next-line no-unused-vars
   const location = useLocation();
 
-  const queryParams = new URLSearchParams(location.search);
-  const template = queryParams.get('template') || 'pro';
-
   useEffect(() => {
-    const data = localStorage.getItem('resumeData');
-    if (data) {
-      setResumeData(JSON.parse(data));
-    } else {
-      alert('No resume data found. Please fill the form first.');
-      navigate('/resume-builder/create');
+    try {
+      const data = localStorage.getItem('resumeData');
+      if (data) {
+        setResumeData(JSON.parse(data));
+      } else {
+        alert('No resume data found. Please fill the form first.');
+        navigate('/resume-builder/create');
+      }
+    } catch (error) {
+      console.error('Error loading resume data:', error);
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   }, [navigate]);
 
   const handlePDFDownload = async () => {
@@ -31,7 +34,7 @@ const CvPreview = () => {
     setDownloadStatus('Generating PDF...');
     try {
       const opt = {
-        margin: 0.5,
+        margin: 0,
         filename: `${resumeData.name.replace(/\s+/g, '_')}_resume.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2 },
@@ -39,9 +42,10 @@ const CvPreview = () => {
       };
       await html2pdf().set(opt).from(cvRef.current).save();
       setDownloadStatus('PDF downloaded successfully!');
-      setTimeout(() => setDownloadStatus(''), 3000);
     } catch (error) {
+      console.error('PDF generation failed:', error);
       setDownloadStatus('PDF generation failed. Please try again.');
+    } finally {
       setTimeout(() => setDownloadStatus(''), 3000);
     }
   };
@@ -65,9 +69,10 @@ const CvPreview = () => {
       link.click();
       document.body.removeChild(link);
       setDownloadStatus('Word document downloaded successfully!');
-      setTimeout(() => setDownloadStatus(''), 3000);
     } catch (error) {
+      console.error('Word generation failed:', error);
       setDownloadStatus('Word document generation failed. Please try again.');
+    } finally {
       setTimeout(() => setDownloadStatus(''), 3000);
     }
   };
@@ -97,40 +102,31 @@ const CvPreview = () => {
         <button onClick={handleBackToForm} className="back-button">
           ← Back to Form
         </button>
-        <h1>📄 Resume Preview</h1>
+        <h1>Resume Preview</h1>
       </div>
 
-      {downloadStatus && (
-        <div className="download-status">
-          {downloadStatus}
-        </div>
-      )}
+      {downloadStatus && <div className="download-status">{downloadStatus}</div>}
 
-      <div
-        className={`cv-preview-container black-text-preview`}
-        ref={cvRef}
-      >
-        {/* Header Section */}
+      <div className="cv-preview-container clean-cv" ref={cvRef}>
         <div className="cv-header">
-          {resumeData.photo && (
-            <div className="photo-section">
-              <img src={resumeData.photo} alt="Profile" />
-            </div>
-          )}
           <div className="header-content">
             <h1 className="name">{resumeData.name}</h1>
             <div className="contact-info">
-              <p><strong>📧 Email:</strong> {resumeData.email}</p>
-              <p><strong>📞 Phone:</strong> {resumeData.phone}</p>
-              <p><strong>🎂 DOB:</strong> {resumeData.dob}</p>
-              <p><strong>📍 Address:</strong> {resumeData.address}</p>
+              <p><strong>Email:</strong> {resumeData.email}</p>
+              <p><strong>Phone:</strong> {resumeData.phone}</p>
+              <p><strong>DOB:</strong> {resumeData.dob}</p>
+              <p><strong>Address:</strong> {resumeData.address}</p>
             </div>
           </div>
+          {resumeData.photo && (
+            <div className="photo-section right-photo">
+              <img src={resumeData.photo} alt="Profile" />
+            </div>
+          )}
         </div>
 
-        {/* Education Section */}
         <section className="cv-section">
-          <h2 className="section-title">🎓 Education</h2>
+          <h2 className="section-title">Education</h2>
           <div className="section-content">
             {resumeData.education.map((edu, i) => (
               <div key={i} className="education-item">
@@ -142,9 +138,8 @@ const CvPreview = () => {
           </div>
         </section>
 
-        {/* Experience Section */}
         <section className="cv-section">
-          <h2 className="section-title">💼 Work Experience</h2>
+          <h2 className="section-title">Work Experience</h2>
           <div className="section-content">
             {resumeData.experience.map((exp, i) => (
               <div key={i} className="experience-item">
@@ -156,9 +151,8 @@ const CvPreview = () => {
           </div>
         </section>
 
-        {/* Projects Section */}
         <section className="cv-section">
-          <h2 className="section-title">🚀 Projects</h2>
+          <h2 className="section-title">Projects</h2>
           <div className="section-content">
             {resumeData.projects.map((proj, i) => (
               <div key={i} className="project-item">
@@ -169,18 +163,16 @@ const CvPreview = () => {
           </div>
         </section>
 
-        {/* Portfolio Section */}
         <section className="cv-section">
-          <h2 className="section-title">🔗 Portfolio & Links</h2>
+          <h2 className="section-title">Portfolio & Links</h2>
           <div className="section-content">
             <p className="links">{resumeData.links}</p>
           </div>
         </section>
 
-        {/* Additional Info Section */}
         {resumeData.additionalInfo && (
           <section className="cv-section">
-            <h2 className="section-title">📝 Additional Information</h2>
+            <h2 className="section-title">Additional Information</h2>
             <div className="section-content">
               <p className="additional-info">{resumeData.additionalInfo}</p>
             </div>
@@ -190,10 +182,10 @@ const CvPreview = () => {
 
       <div className="cv-preview-actions">
         <button onClick={handlePDFDownload} className="download-btn pdf-btn">
-          📄 Download PDF
+          Download PDF
         </button>
         <button onClick={handleWordDownload} className="download-btn word-btn">
-          📝 Download Word
+          Download Word
         </button>
       </div>
     </div>
