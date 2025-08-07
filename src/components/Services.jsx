@@ -2,6 +2,7 @@ import React from 'react';
 import './Services.css';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
+import pic9 from '../assets/pic9.png'; // ✅ make sure image path is correct
 
 const services = [
   {
@@ -61,27 +62,33 @@ const Services = () => {
         </div>
       )}
 
-      <div className="services-grid">
-        {services.map((service, index) => (
-          <div
-            className="service-card"
-            key={index}
-            onClick={() => handleCardClick(service.link)}
-            style={service.link ? { cursor: 'pointer' } : {}}
-          >
-            <img
-              className="service-image"
-              src={service.image}
-              alt={service.title}
-            />
-            <div className="icon">{service.icon}</div>
-            <h3>{service.title}</h3>
-            <p>{service.description}</p>
-            {!isLoggedIn && (
-              <div className="login-badge">🔒 Login Required</div>
-            )}
-          </div>
-        ))}
+      <div className="services-main-container">
+        <div className="services-grid">
+          {services.map((service, index) => (
+            <div
+              className="service-card"
+              key={index}
+              onClick={() => handleCardClick(service.link)}
+              style={service.link ? { cursor: 'pointer' } : {}}
+            >
+              <img
+                className="service-image"
+                src={service.image}
+                alt={service.title}
+              />
+              <div className="icon">{service.icon}</div>
+              <h3>{service.title}</h3>
+              <p>{service.description}</p>
+              {!isLoggedIn && (
+                <div className="login-badge">🔒 Login Required</div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="services-side-image">
+          <img src={pic9} alt="AI Assistant" />
+        </div>
       </div>
     </section>
   );

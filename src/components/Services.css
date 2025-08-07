@@ -26,13 +26,20 @@
   border: 1px solid #22c55e;
 }
 
-/* ✅ FLEX layout to prevent stretch and fix 2 cards per row */
-.services-grid {
+.services-main-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: flex-start;
   gap: 2rem;
-  padding: 0 1rem;
+  margin-top: 2rem;
+}
+
+/* Left Grid: Cards 2 in 1 row */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  flex: 1;
 }
 
 .service-card {
@@ -45,13 +52,13 @@
   flex-direction: column;
   align-items: center;
   color: #000000;
-  width: 350px; /* ✅ fixed width */
-  min-height: 430px; /* optional: adjust height if needed */
+  width: 350px;
+  min-height: 430px;
 }
 
 .service-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 0 15px 2px gold; /* golden glow effect */
+  box-shadow: 0 0 15px 2px gold;
 }
 
 .service-image {
@@ -75,4 +82,29 @@
   border-radius: 4px;
   font-size: 0.875rem;
   font-weight: 500;
+}
+
+/* Right Side Image */
+.services-side-image {
+  flex: 0 0 40%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem 1rem 1rem; /* 👈 shifted image downward slightly */
+  margin-top: 18rem; /* 👈 helps with vertical centering */
+}
+
+.services-side-image img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 1.5rem;
+  border: 2px solid #34d399;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.services-side-image img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
 }

@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Interview from '../api/Interview';
 import useAuthStore from '../store/authStore';
 import '../App.css';
-import './PageStyles.css';
+import './JobSearch.css';
 
 const JobSearch = () => {
   const navigate = useNavigate();
@@ -24,12 +25,14 @@ const JobSearch = () => {
   const [jobCount, setJobCount] = useState(5);
   const [lastPrompt, setLastPrompt] = useState('');
 
-  if (!isLoggedIn) {
-    return null;
-  }
+  if (!isLoggedIn) return null;
 
   const buildPrompt = (count = 5) =>
-    `Suggest the ${count} best job roles for a person with these skills: ${skills || 'N/A'} and degree: ${degree || 'N/A'}. For each job, give:\n1. Job Title\n2. 2-3 sentence description\n3. Why it fits these skills/degree.\nFormat as a numbered list. Do not ask questions, just list jobs as requested.`;
+    `Suggest the ${count} best job roles for a person with these skills: ${
+      skills || 'N/A'
+    } and degree: ${
+      degree || 'N/A'
+    }. For each job, give:\n1. Job Title\n2. 2-3 sentence description\n3. Why it fits these skills/degree.\nFormat as a numbered list. Do not ask questions, just list jobs as requested.`;
 
   const parseJobs = (response) => {
     const jobs = response.split(/\n\s*\d+\.\s*/).filter(Boolean);
@@ -43,7 +46,7 @@ const JobSearch = () => {
         else description += line + ' ';
       });
       return {
-        title: title?.replace(/^[-*•]?\s*/, '').trim(),
+        title: title?.replace(/^[-*\u2022]?\s*/, '').trim(),
         description: description.trim(),
         why: why.trim(),
       };
@@ -89,12 +92,26 @@ const JobSearch = () => {
 
   return (
     <div className="themed-page jobsearch-page">
-      <div className="jobsearch-hero-split">
-        <div className="jobsearch-hero-image-glow">
-          <img src="/src/assets/job_search.jpg" alt="Job Search - Professional" className="jobsearch-img-large" />
+      <h2 className="themed-heading ai-job-heading">AI Job Search</h2>
+      <div className="jobsearch-layout">
+
+        {/* 💚 Side Images Stacked */}
+        <div className="side-images-container">
+          <div className="side-image">
+            <img src="/src/assets/pic7.avif" alt="Image 1" />
+          </div>
+          <div className="side-image">
+            <img src="/src/assets/pic8.webp" alt="Image 2" />
+          </div>
         </div>
-        <div className="jobsearch-content card-style">
-          <h2 className="themed-heading">🔍 AI Job Search</h2>
+
+        {/* 💻 Form and Results Section */}
+        <div className="jobsearch-form-container card-style">
+          <img
+            src="/src/assets/pic6.jpeg"
+            alt="Job Search Visual"
+            className="top-image"
+          />
           <form onSubmit={handleSearch} className="jobsearch-form">
             <div className="form-group">
               <label htmlFor="skills">Skills</label>
@@ -121,18 +138,29 @@ const JobSearch = () => {
               <button type="submit" className="themed-btn" disabled={isLoading}>
                 {isLoading ? 'Searching...' : 'Find Jobs'}
               </button>
-              <button type="button" className="themed-btn secondary" onClick={handleClear} disabled={isLoading}>
+              <button
+                type="button"
+                className="themed-btn secondary"
+                onClick={handleClear}
+                disabled={isLoading}
+              >
                 Clear
               </button>
             </div>
           </form>
+
+          {/* 💼 AI Results */}
           <div className="jobsearch-results fade-in">
-            {isLoading && <div className="loading-text">AI is searching for jobs...</div>}
+            {isLoading && (
+              <div className="loading-text">AI is searching for jobs...</div>
+            )}
             {results.length > 0 && (
               <div className="results-list">
                 {results.map((job, idx) => (
                   <div key={idx} className="result-card">
-                    <div className="result-title">{job.title || `Job ${idx + 1}`}</div>
+                    <div className="result-title">
+                      {job.title || `Job ${idx + 1}`}
+                    </div>
                     <div className="result-summary">{job.description}</div>
                     {job.why && <div className="result-why">{job.why}</div>}
                   </div>
