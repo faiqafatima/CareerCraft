@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './CvPreview.css';
 import html2pdf from 'html2pdf.js';
 
@@ -9,8 +9,6 @@ const CvPreview = () => {
   const [downloadStatus, setDownloadStatus] = useState('');
   const cvRef = useRef();
   const navigate = useNavigate();
-  // eslint-disable-next-line no-unused-vars
-  const location = useLocation();
 
   useEffect(() => {
     try {
@@ -38,7 +36,7 @@ const CvPreview = () => {
         filename: `${resumeData.name.replace(/\s+/g, '_')}_resume.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2 },
-        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
       };
       await html2pdf().set(opt).from(cvRef.current).save();
       setDownloadStatus('PDF downloaded successfully!');
@@ -58,7 +56,7 @@ const CvPreview = () => {
       const content = cvRef.current.innerHTML;
       const blob = new Blob(
         [
-          `<html><head><meta charset="utf-8"><title>${resumeData.name} - Resume</title></head><body>${content}</body></html>`
+          `<html><head><meta charset="utf-8"><title>${resumeData.name} - Resume</title></head><body>${content}</body></html>`,
         ],
         { type: 'application/msword' }
       );
@@ -105,79 +103,125 @@ const CvPreview = () => {
         <h1>Resume Preview</h1>
       </div>
 
-      {downloadStatus && <div className="download-status">{downloadStatus}</div>}
+      {downloadStatus && (
+        <div className="download-status">{downloadStatus}</div>
+      )}
 
-      <div className="cv-preview-container clean-cv" ref={cvRef}>
-        <div className="cv-header">
-          <div className="header-content">
-            <h1 className="name">{resumeData.name}</h1>
-            <div className="contact-info">
-              <p><strong>Email:</strong> {resumeData.email}</p>
-              <p><strong>Phone:</strong> {resumeData.phone}</p>
-              <p><strong>DOB:</strong> {resumeData.dob}</p>
-              <p><strong>Address:</strong> {resumeData.address}</p>
-            </div>
+      <div className="cv-preview-container" ref={cvRef}>
+        {/* Header: Profile Image + Name + Job Title */}
+        <header className="cv-header">
+          <div className="profile-photo-wrapper">
+            {resumeData.photo ? (
+              <img
+                src={resumeData.photo}
+                alt="Profile"
+                className="profile-photo"
+              />
+            ) : (
+              <div className="profile-photo placeholder">No Photo</div>
+            )}
           </div>
-          {resumeData.photo && (
-            <div className="photo-section right-photo">
-              <img src={resumeData.photo} alt="Profile" />
-            </div>
-          )}
+          <h1 className="cv-name">{resumeData.name.toUpperCase()}</h1>
+          <h2 className="cv-job-title">
+            {resumeData.jobTitle ? resumeData.jobTitle.toUpperCase() : ''}
+          </h2>
+        </header>
+
+        <div className="cv-body">
+          {/* Left Sidebar */}
+          <aside className="cv-sidebar">
+            {/* Details Section */}
+            <section className="cv-section sidebar-section">
+              <h3 className="section-header">
+                <span className="icon">📋</span> DETAILS
+              </h3>
+              <ul className="details-list">
+                {resumeData.address && <li>{resumeData.address}</li>}
+                {resumeData.phone && <li>{resumeData.phone}</li>}
+                {resumeData.email && <li>{resumeData.email}</li>}
+                {resumeData.linkedin && (
+                  <li>
+                    <a
+                      href={resumeData.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      LinkedIn Profile
+                    </a>
+                  </li>
+                )}
+              </ul>
+            </section>
+
+            {/* Skills Section */}
+            {resumeData.skills && resumeData.skills.length > 0 && (
+              <section className="cv-section sidebar-section">
+                <h3 className="section-header">
+                  <span className="icon">💡</span> SKILLS
+                </h3>
+                <ul className="skills-list">
+                  {resumeData.skills.map((skill, i) => (
+                    <li key={i}>{skill}</li>
+                  ))}
+                </ul>
+              </section>
+            )}
+          </aside>
+
+          {/* Right Main Content */}
+          <main className="cv-main">
+            {/* Profile Section */}
+            {resumeData.profile && (
+              <section className="cv-section">
+                <h3 className="section-header">PROFILE</h3>
+                <p>{resumeData.profile}</p>
+              </section>
+            )}
+
+            {/* Employment History */}
+            {resumeData.experience && resumeData.experience.length > 0 && (
+              <section className="cv-section">
+                <h3 className="section-header">EMPLOYMENT HISTORY</h3>
+                {resumeData.experience.map((job, i) => (
+                  <div key={i} className="job-item">
+                    <div className="job-left">
+                      <strong>{job.role}</strong>, {job.company}, {job.location}
+                      <ul>
+                        {job.responsibilities &&
+                          job.responsibilities.map((item, idx) => (
+                            <li key={idx}>{item}</li>
+                          ))}
+                      </ul>
+                    </div>
+                    <div className="job-right">{job.duration}</div>
+                  </div>
+                ))}
+              </section>
+            )}
+
+            {/* Education */}
+            {resumeData.education && resumeData.education.length > 0 && (
+              <section className="cv-section">
+                <h3 className="section-header">EDUCATION</h3>
+                {resumeData.education.map((edu, i) => (
+                  <div key={i} className="education-item">
+                    <div className="edu-left">
+                      <strong>{edu.degree}</strong>, {edu.school},{' '}
+                      {edu.location}
+                    </div>
+                    <div className="edu-right">{edu.year}</div>
+                  </div>
+                ))}
+              </section>
+            )}
+
+            {/* References */}
+            <section className="cv-section">
+              <h3 className="section-header">REFERENCES</h3>
+              <p>Available upon request.</p>
+            </section>
+          </main>
         </div>
-
-        <section className="cv-section">
-          <h2 className="section-title">Education</h2>
-          <div className="section-content">
-            {resumeData.education.map((edu, i) => (
-              <div key={i} className="education-item">
-                <h3>{edu.degree}</h3>
-                <p className="institution">{edu.institute}</p>
-                <p className="year">({edu.year})</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="cv-section">
-          <h2 className="section-title">Work Experience</h2>
-          <div className="section-content">
-            {resumeData.experience.map((exp, i) => (
-              <div key={i} className="experience-item">
-                <h3>{exp.role}</h3>
-                <p className="company">{exp.company}</p>
-                <p className="duration">{exp.duration}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="cv-section">
-          <h2 className="section-title">Projects</h2>
-          <div className="section-content">
-            {resumeData.projects.map((proj, i) => (
-              <div key={i} className="project-item">
-                <h3>{proj.title}</h3>
-                <p className="description">{proj.description}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="cv-section">
-          <h2 className="section-title">Portfolio & Links</h2>
-          <div className="section-content">
-            <p className="links">{resumeData.links}</p>
-          </div>
-        </section>
-
-        {resumeData.additionalInfo && (
-          <section className="cv-section">
-            <h2 className="section-title">Additional Information</h2>
-            <div className="section-content">
-              <p className="additional-info">{resumeData.additionalInfo}</p>
-            </div>
-          </section>
-        )}
       </div>
 
       <div className="cv-preview-actions">

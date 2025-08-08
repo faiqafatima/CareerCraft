@@ -20,7 +20,7 @@
   max-width: 600px;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 128, 0, 0.3); /* subtle green glow */
+  box-shadow: 0 0 20px rgba(34, 197, 156, 0.3); /* soft teal shadow */
 }
 
 .interview-img-large {
@@ -44,7 +44,7 @@
 /* Card Heading */
 .themed-heading {
   font-size: 1.8rem;
-  color: #006400; /* Dark green to match navbar */
+  color: #22c59c; /* main teal blue */
   margin-bottom: 1rem;
   text-align: center;
 }
@@ -67,11 +67,11 @@
   max-height: 500px;
   min-height: 300px;
   overflow-y: auto;
-  border: 1px solid #ddd;
+  border: 1px solid #a0d8cc; /* lighter teal border */
   padding: 1rem;
   border-radius: 12px;
   background-color: rgba(255, 255, 255, 0.6); /* light see-through bg */
-  backdrop-filter: blur(1px); /* subtle blur for text clarity */
+  backdrop-filter: blur(1px);
 }
 
 .chat-bubble {
@@ -83,7 +83,7 @@
 }
 
 .chat-bubble.user {
-  background-color: #e0f7e9;
+  background-color: #d1f0e5; /* light teal */
   align-self: flex-end;
   text-align: right;
 }
@@ -104,7 +104,7 @@
   width: 100%;
   padding: 1rem;
   border-radius: 12px;
-  border: 1px solid #ccc;
+  border: 1px solid #a0d8cc; /* light teal border */
   resize: none;
   font-size: 1rem;
 }
@@ -118,7 +118,7 @@
 }
 
 .error {
-  color: red;
+  color: rgb(255, 0, 170);
   font-weight: 500;
 }
 
@@ -135,13 +135,13 @@
   border: none;
   cursor: pointer;
   font-size: 1rem;
-  background-color: #228b22;
+  background-color: #22c59c; /* main teal blue */
   color: white;
   transition: background-color 0.3s ease;
 }
 
 .themed-btn:hover {
-  background-color: #006400;
+  background-color: #033d33; /* dark blue-green hover */
 }
 
 .clear-button.secondary {
@@ -177,7 +177,7 @@
   background-image: url('../../assets/Mi.jpeg'); /* ✅ Your image */
   background-size: cover;
   background-position: center;
-  filter: blur(1px) brightness(0.9); /* ✨ light blur + visible */
+  filter: blur(1px) brightness(0.9);
   opacity: 0.9;
   z-index: 0;
 }

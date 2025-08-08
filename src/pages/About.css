@@ -37,8 +37,8 @@
   height: 320px;
   object-fit: cover;
   border-radius: 2rem;
-  border: 4px solid #22c55e;
-  box-shadow: 0 0 60px 0 #22c55e33, 0 8px 32px #16323533;
+  border: 4px solid #22c59c; /* updated main green */
+  box-shadow: 0 0 60px 0 #22c59c33, 0 8px 32px #16323533; /* updated shadow */
   background: #fff;
   z-index: 2;
 }
@@ -50,7 +50,11 @@
   top: 50%;
   width: 360px;
   height: 360px;
-  background: radial-gradient(circle, rgba(34,197,94,0.12) 0%, transparent 80%);
+  background: radial-gradient(
+    circle,
+    rgba(34, 197, 156, 0.12) 0%,
+    transparent 80%
+  ); /* updated rgba for new green */
   transform: translate(-50%, -50%);
   filter: blur(24px);
   z-index: 1;
@@ -82,13 +86,13 @@
   background: #fff;
   color: var(--text-main);
   border-radius: 1rem;
-  box-shadow: 0 2px 12px #22c55e20;
+  box-shadow: 0 2px 12px #22c59c20; /* updated main green */
   padding: 1.2rem 1rem;
   transition: box-shadow 0.2s, transform 0.2s;
 }
 
 .offer-card:hover {
-  box-shadow: 0 4px 24px #22c55e40;
+  box-shadow: 0 4px 24px #033d33; /* updated hover dark green */
   transform: translateY(-4px) scale(1.02);
 }
 
@@ -102,13 +106,13 @@
   width: 280px;
   height: auto;
   border-radius: 1rem;
-  box-shadow: 0 8px 32px rgba(34, 197, 94, 0.3);
+  box-shadow: 0 8px 32px rgba(34, 197, 156, 0.3); /* updated main green */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .pic10-img:hover {
   transform: scale(1.05);
-  box-shadow: 0 12px 40px rgba(34, 197, 94, 0.5);
+  box-shadow: 0 12px 40px #033d33; /* updated hover dark green */
 }
 
 /* Responsive */
@@ -118,13 +122,13 @@
     transform: translateX(0);
     gap: 2rem;
   }
-  
+
   .about-img-large {
     width: 90vw;
     height: auto;
     max-width: 320px;
   }
-  
+
   .about-offers-grid {
     grid-template-columns: 1fr;
   }

@@ -1,237 +1,316 @@
-/* ======== Layout ======== */
+/* Overall page and layout */
 .cv-preview-page {
-  background: linear-gradient(to bottom right, #10393a, #0f5957);
+  background: #f5f5f5;
   min-height: 100vh;
-  padding: 60px 20px;
-  color: #000;
-  font-family: 'Segoe UI', Arial, sans-serif;
+  padding: 40px 20px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #222;
 }
 
-/* ======== Header ======== */
+/* Header with back button and title */
 .cv-preview-header {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto 20px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 20px;
 }
 
+/* Updated heading color to green */
 .cv-preview-header h1 {
-  color: #fff;
-  font-size: 24px;
-  margin: 0;
+  font-weight: 700;
+  font-size: 28px;
+  color: #22c5aa;
 }
+
 
 .back-button {
-  background-color: #228b22;
-  color: white;
+  background:  #22c5aa; /* green instead of black */
+  color: #fff;
   border: none;
   padding: 10px 16px;
-  border-radius: 6px;
+  border-radius: 5px;
   cursor: pointer;
+  font-weight: 600;
   font-size: 14px;
-  font-weight: 500;
-  box-shadow: 0 0 20px rgba(0, 128, 0, 0.3);
-  transition: background-color 0.3s ease;
+  transition: background 0.3s ease;
 }
 
 .back-button:hover {
-  background-color: #006400;
+  background: #033d33;/* darker green on hover */
 }
 
-/* ======== Status Messages ======== */
 .download-status {
-  max-width: 800px;
-  margin: 0 auto 20px;
-  background-color: #f3f4f6;
-  color: #000;
+  max-width: 900px;
+  margin: 10px auto;
+  background: #d4edda;
   padding: 12px;
-  border-radius: 6px;
+  border-radius: 5px;
+  color: #155724;
   text-align: center;
-  font-weight: 500;
-  border: 1px solid #ccc;
+  font-weight: 600;
+  border: 1px solid #c3e6cb;
 }
 
-/* ======== Main Container ======== */
+/* Main CV container */
 .cv-preview-container {
-  max-width: 800px;
-  margin: auto;
-  padding: 40px;
-  background-color: #fff;
-  color: #000;
-  word-wrap: break-word;
-  overflow-wrap: anywhere;
-  line-height: 1.6;
-  box-shadow: none;
-  border: none;
+  max-width: 900px;
+  background: #fff;
+  margin: 0 auto;
+  padding: 40px 50px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
 }
 
-/* ======== Header Section ======== */
+/* Header with profile photo, name and job title */
 .cv-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 30px;
+  text-align: center;
   margin-bottom: 40px;
-  padding-bottom: 30px;
-  border-bottom: 2px solid #000;
 }
 
-.photo-section img {
-  width: 120px;
-  height: 120px;
+.profile-photo-wrapper {
+  margin-bottom: 16px;
+}
+
+.profile-photo {
+  width: 130px;
+  height: 130px;
   object-fit: cover;
-  border-radius: 10px;
-  border: none;
+  border-radius: 50%;
+  border: 3px solid #333;
+  display: inline-block;
 }
 
-.name {
+.profile-photo.placeholder {
+  width: 130px;
+  height: 130px;
+  background: #ccc;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cv-name {
   font-size: 32px;
   font-weight: 700;
-  color: #000;
-  margin: 0 0 20px 0;
+  letter-spacing: 2px;
+  margin: 0 0 6px 0;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  color: #222;
 }
 
-.contact-info {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+.cv-job-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #666;
+  letter-spacing: 1.5px;
+  margin: 0 0 0 0;
+  text-transform: uppercase;
 }
 
-.contact-info p {
-  margin: 5px 0;
+/* Body is 2 columns: sidebar & main */
+.cv-body {
+  display: flex;
+  gap: 40px;
+}
+
+/* Sidebar (left) */
+.cv-sidebar {
+  flex: 0 0 28%;
+  border-right: 1px solid #ccc;
+  padding-right: 20px;
+}
+
+/* Sidebar Section */
+.sidebar-section {
+  margin-bottom: 30px;
+}
+
+/* Section headers with icons */
+.section-header {
+  font-weight: 700;
   font-size: 14px;
-  color: #000;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.contact-info strong {
-  color: #000;
+.section-header .icon {
+  font-size: 16px;
 }
 
-/* ======== Sections ======== */
+/* Lists in sidebar */
+.details-list,
+.skills-list {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.details-list li,
+.skills-list li {
+  margin-bottom: 6px;
+}
+
+/* Links style */
+.details-list a {
+  color: #333;
+  text-decoration: none;
+}
+
+.details-list a:hover {
+  text-decoration: underline;
+}
+
+/* Main content (right) */
+.cv-main {
+  flex: 1;
+}
+
+/* Main sections */
 .cv-section {
   margin-bottom: 30px;
-  padding-bottom: 20px;
-  border-bottom: 2px solid #000;
 }
 
-.section-title {
-  font-size: 20px;
-  font-weight: 700;
-  color: #000;
-  margin-bottom: 15px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+/* Section header */
+.cv-section > .section-header {
+  font-size: 18px;
+  margin-bottom: 14px;
+  color: #222;
+  border-bottom: 2px solid #222;
+  padding-bottom: 6px;
 }
 
-.section-content {
-  padding-left: 0;
-}
-
-/* ======== Items (Education, Experience, Projects) ======== */
-.education-item,
-.experience-item,
-.project-item {
-  margin-bottom: 16px;
-  padding: 0;
-  background-color: transparent;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-}
-
-.education-item h3,
-.experience-item h3,
-.project-item h3 {
-  font-size: 16px;
-  font-weight: 600;
-  color: #000;
-  margin: 0 0 5px 0;
-}
-
-.institution,
-.company {
-  font-size: 14px;
-  color: #333;
-  margin: 0 0 5px 0;
-}
-
-.year,
-.duration {
-  font-size: 12px;
-  color: #000;
-  font-weight: 600;
-  margin: 0;
-}
-
-.project-item .description {
-  font-size: 14px;
-  color: #000;
-  margin: 0;
-  line-height: 1.5;
-}
-
-/* ======== Links & Additional Info ======== */
-.links,
-.additional-info {
-  font-size: 14px;
-  color: #000;
-  line-height: 1.6;
-}
-
-/* ======== Buttons Section ======== */
-.cv-preview-actions {
+/* Job item */
+.job-item,
+.education-item {
   display: flex;
-  justify-content: center;
-  margin-top: 30px;
-  gap: 16px;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 12px;
 }
 
-.download-btn,
-.themed-btn {
-  background-color: #228b22;
+.job-left {
+  max-width: 75%;
+}
+
+.job-left strong {
+  font-weight: 700;
+  font-size: 16px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.job-left ul {
+  margin: 0;
+  padding-left: 18px;
+  color: #444;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.job-left ul li {
+  margin-bottom: 6px;
+}
+
+.job-right {
+  min-width: 110px;
+  font-size: 14px;
+  color: #666;
+  text-align: right;
+  font-style: italic;
+}
+
+/* Education */
+.edu-left {
+  max-width: 75%;
+  font-size: 15px;
+  color: #222;
+}
+
+.edu-left strong {
+  font-weight: 700;
+}
+
+.edu-right {
+  min-width: 110px;
+  font-size: 14px;
+  color: #666;
+  text-align: right;
+  font-style: italic;
+}
+
+/* Profile summary */
+.cv-section p {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #444;
+}
+
+/* References */
+.cv-section.references p {
+  font-style: italic;
+  color: #666;
+}
+
+/* Download buttons container */
+.cv-preview-actions {
+  max-width: 900px;
+  margin: 30px auto 0 auto;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.download-btn {
+  background-color: #22c59c; /* Blue background */
   color: white;
   border: none;
-  padding: 12px 24px;
+  padding: 14px 28px;
   border-radius: 6px;
-  cursor: pointer;
+  font-weight: 700;
   font-size: 16px;
-  font-weight: 600;
-  box-shadow: 0 0 20px rgba(0, 128, 0, 0.3);
+  cursor: pointer;
+  box-shadow: 0 0 12px #22c55e88;
   transition: background-color 0.3s ease;
 }
 
-.download-btn:hover,
-.themed-btn:hover {
-  background-color: #006400;
+.download-btn:hover {
+  background: #033d33;/* darker blue on hover */
 }
 
-/* ======== Responsive Design ======== */
+/* Responsive */
 @media (max-width: 768px) {
-  .cv-preview-container {
-    padding: 20px;
-    margin: 10px;
-  }
-
-  .cv-header {
-    flex-direction: column-reverse;
-    text-align: center;
-    gap: 20px;
-  }
-
-  .contact-info {
-    grid-template-columns: 1fr;
-  }
-
-  .cv-preview-actions {
+  .cv-body {
     flex-direction: column;
-    align-items: center;
   }
 
-  .cv-preview-header {
+  .cv-sidebar {
+    border-right: none;
+    padding-right: 0;
+    margin-bottom: 30px;
+  }
+
+  .job-item,
+  .education-item {
     flex-direction: column;
-    text-align: center;
+  }
+
+  .job-right,
+  .edu-right {
+    text-align: left;
+    font-style: normal;
+    margin-top: 6px;
   }
 }

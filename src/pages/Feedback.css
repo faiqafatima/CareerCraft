@@ -1,0 +1,202 @@
+/* ===== Feedback Page Updated Styles ===== */
+
+/* Main Heading outside box */
+.feedback-heading-main {
+  font-size: 2.8rem;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 1.5rem;
+}
+
+/* Split Layout */
+.feedback-hero-split {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+/* Left Image (pic18) */
+.feedback-left-image img {
+  width: 320px;
+  height: auto;
+  border-radius: 1.5rem;
+  object-fit: cover;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25), 0 0 40px rgba(34, 197, 94, 0.25);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.feedback-left-image img:hover {
+  transform: scale(1.05) rotate(1deg);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35), 0 0 50px rgba(34, 197, 94, 0.35);
+}
+
+/* Feedback Content Box */
+.feedback-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Banner Image above form (pic19) */
+.feedback-top-image {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.feedback-top-image img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 1rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2), 0 0 35px rgba(34, 197, 94, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: block;
+}
+
+.feedback-top-image img:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3), 0 0 45px rgba(34, 197, 94, 0.25);
+}
+
+/* Inputs Section */
+.form-inputs-section {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* ===== Updated Side Images Container ===== */
+.feedback-side-image {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  padding: 1.5rem;
+  width: 220px;
+  background: rgba(34, 197, 94, 0.1);
+  border-radius: 1rem;
+  box-shadow: 0 8px 30px rgba(34, 197, 94, 0.25);
+}
+
+/* Hide pic20 from side container */
+.feedback-side-image img.pic20 {
+  display: none;
+}
+
+/* pic21 bigger and centered, no shadow */
+.feedback-side-image img.pic21 {
+  width: 320px;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.35s ease, filter 0.35s ease;
+  cursor: pointer;
+  margin-bottom: -15px;
+  box-shadow: none !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.feedback-side-image img.pic21:hover {
+  transform: scale(1.1);
+  filter: brightness(1.15);
+}
+
+/* Stars */
+.star-row {
+  display: flex;
+  gap: 0.3rem;
+  margin-bottom: 0.3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.star {
+  font-size: 1.7rem;
+  color: var(--soft-grey);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.star.filled {
+  color: var(--primary-green);
+}
+
+.star-label {
+  color: var(--soft-grey);
+  font-size: 0.95rem;
+}
+
+/* feedback info box: layout for text + pic20 */
+.feedback-info-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* pic20 inside info box: circular with green shadow */
+.feedback-info-box img.pic20 {
+  display: block;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 45px rgba(34, 197, 94, 0.4);
+  flex-shrink: 0;
+  transition: transform 0.35s ease;
+}
+
+.feedback-info-box img.pic20:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .feedback-hero-split {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .form-inputs-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .feedback-side-image {
+    width: 140px;
+    padding: 1rem;
+    margin-left: 0;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .feedback-left-image img {
+    width: 90vw;
+    max-width: 320px;
+  }
+
+  .feedback-top-image {
+    max-width: 100%;
+  }
+
+  .feedback-side-image img.pic21 {
+    width: 600px;
+    height: 100px;
+  }
+
+  .feedback-info-box img.pic20 {
+    width: 100px;
+    height: 100px;
+  }
+}

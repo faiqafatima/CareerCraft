@@ -45,7 +45,8 @@
 }
 
 @keyframes glowPulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     opacity: 0.4;
   }
@@ -72,7 +73,7 @@
 }
 
 .green-text {
-  color: #22c55e;
+  color: #22c59c; /* Updated green text color */
 }
 
 .hero-left p {
@@ -101,15 +102,15 @@
 }
 
 .get-started {
-  background-color: #4fbc9c;
+  background-color: #22c59c; /* Updated green */
   color: #0a0a0a;
-  box-shadow: 0 0 20px #4fbc9c80;
+  box-shadow: 0 0 20px #22c59c80; /* Updated shadow */
   border: none;
 }
 
 .get-started:hover {
-  background-color: #32bf7a;
-  box-shadow: 0 0 25px #32bf7a;
+  background-color: #033d33; /* Updated hover */
+  box-shadow: 0 0 25px #033d33;
 }
 
 .explore-features {
@@ -141,7 +142,8 @@
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {

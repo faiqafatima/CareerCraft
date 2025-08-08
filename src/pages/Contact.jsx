@@ -7,14 +7,14 @@ const Contact = () => {
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -35,15 +35,28 @@ const Contact = () => {
           <div className="contact-info-box">
             <h2 className="themed-subheading">Get in Touch</h2>
             <p>
-              Have questions about CareerCraft? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+              Have questions about CareerCraft? We'd love to hear from you. Send
+              us a message and we'll respond as soon as possible.
             </p>
             <div className="contact-method">
               <h3>📧 Email</h3>
-              <a href="mailto:faiqafatimarana15@gmail.com" className="themed-link">faiqafatimarana15@gmail.com</a>
+              <a
+                href="mailto:faiqafatimarana15@gmail.com"
+                className="themed-link"
+              >
+                faiqafatimarana15@gmail.com
+              </a>
             </div>
             <div className="contact-method">
               <h3>📱 Instagram</h3>
-              <a href="https://instagram.com/faiqarana._" target="_blank" rel="noopener noreferrer" className="themed-link">@faiqarana._</a>
+              <a
+                href="https://instagram.com/faiqarana._"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="themed-link"
+              >
+                @faiqarana._
+              </a>
             </div>
             <div className="contact-method">
               <h3>⏰ Response Time</h3>
@@ -53,7 +66,9 @@ const Contact = () => {
           <div className="contact-form-box">
             <h2 className="themed-subheading">Send us a Message</h2>
             {isSubmitted ? (
-              <div className="form-success">Thank you for your message! We'll get back to you soon.</div>
+              <div className="form-success">
+                Thank you for your message! We'll get back to you soon.
+              </div>
             ) : (
               <form onSubmit={handleSubmit} className="contact-form">
                 <div className="form-group">
@@ -100,14 +115,19 @@ const Contact = () => {
                     rows="4"
                   />
                 </div>
-                <button type="submit" className="themed-btn">Send Message</button>
+                <button type="submit" className="themed-btn">
+                  Send Message
+                </button>
               </form>
             )}
           </div>
         </div>
         <div className="contact-section card-style fade-in">
           <h3>Need Immediate Help?</h3>
-          <p>For urgent matters, please reach out to us directly via email or Instagram. We're here to help!</p>
+          <p>
+            For urgent matters, please reach out to us directly via email or
+            Instagram. We're here to help!
+          </p>
         </div>
       </div>
     </div>

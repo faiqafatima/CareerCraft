@@ -8,7 +8,6 @@ const ResumeForm = () => {
   const location = useLocation();
   const { isLoggedIn } = useAuthStore();
 
-  // Redirect to login if not authenticated
   useEffect(() => {
     if (!isLoggedIn) {
       alert('Please log in to access Resume Builder.');
@@ -16,18 +15,26 @@ const ResumeForm = () => {
     }
   }, [isLoggedIn, navigate]);
 
-  // Get template from URL: ?template=pro or ?template=personal
   const searchParams = new URLSearchParams(location.search);
   const template = searchParams.get('template'); // 'pro' or 'personal'
 
   const [formData, setFormData] = useState({
     name: '',
+    jobTitle: '', // NEW field for professional title
     email: '',
     phone: '',
     dob: '',
     address: '',
+    linkedin: '', // NEW field for LinkedIn URL
+    skills: [''], // NEW: array of skills
+    profile: '',  // NEW: professional summary
     education: [{ degree: '', institute: '', year: '' }],
-    experience: [{ role: '', company: '', duration: '' }],
+    experience: [{
+      role: '',
+      company: '',
+      duration: '',
+      responsibilities: [''], // NEW: bullet points for each job
+    }],
     projects: [{ title: '', description: '' }],
     links: '',
     additionalInfo: '',
@@ -37,12 +44,9 @@ const ResumeForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [saveStatus, setSaveStatus] = useState('');
 
-  // Don't render if not logged in
-  if (!isLoggedIn) {
-    return null;
-  }
+  if (!isLoggedIn) return null;
 
-  // Load draft on component mount
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     const savedDraft = localStorage.getItem('resumeDraft');
     if (savedDraft) {
@@ -52,7 +56,7 @@ const ResumeForm = () => {
     }
   }, []);
 
-  // Auto-save draft every 30 seconds
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     const interval = setInterval(() => {
       if (Object.values(formData).some(value => value !== '' && value !== null)) {
@@ -75,13 +79,24 @@ const ResumeForm = () => {
     setFormData({ ...formData, [section]: updatedSection });
   };
 
+  // For nested array like responsibilities in experience
+  const handleNestedArrayChange = (section, index, nestedIndex, value) => {
+    const updatedSection = [...formData[section]];
+    updatedSection[index].responsibilities[nestedIndex] = value;
+    setFormData({ ...formData, [section]: updatedSection });
+  };
+
   const addSection = (section) => {
-    const newItem =
-      section === 'education'
-        ? { degree: '', institute: '', year: '' }
-        : section === 'experience'
-        ? { role: '', company: '', duration: '' }
-        : { title: '', description: '' };
+    let newItem;
+    if (section === 'education') {
+      newItem = { degree: '', institute: '', year: '' };
+    } else if (section === 'experience') {
+      newItem = { role: '', company: '', duration: '', responsibilities: [''] };
+    } else if (section === 'projects') {
+      newItem = { title: '', description: '' };
+    } else if (section === 'skills') {
+      newItem = '';
+    }
     setFormData({ ...formData, [section]: [...formData[section], newItem] });
   };
 
@@ -90,6 +105,21 @@ const ResumeForm = () => {
       const updated = [...formData[section]];
       updated.splice(index, 1);
       setFormData({ ...formData, [section]: updated });
+    }
+  };
+
+  // Add/remove responsibility bullet points inside experience
+  const addResponsibility = (expIndex) => {
+    const updatedExperience = [...formData.experience];
+    updatedExperience[expIndex].responsibilities.push('');
+    setFormData({ ...formData, experience: updatedExperience });
+  };
+
+  const removeResponsibility = (expIndex, respIndex) => {
+    const updatedExperience = [...formData.experience];
+    if (updatedExperience[expIndex].responsibilities.length > 1) {
+      updatedExperience[expIndex].responsibilities.splice(respIndex, 1);
+      setFormData({ ...formData, experience: updatedExperience });
     }
   };
 
@@ -104,32 +134,35 @@ const ResumeForm = () => {
     reader.readAsDataURL(file);
   };
 
-  // Different validation rules based on template
   const isFormValid = () => {
-    const { name, email, phone, dob, address, links, education, experience, projects } = formData;
+    const { name, jobTitle, email, phone, dob, address, linkedin, skills, profile, education, experience, projects, links } = formData;
 
     if (template === 'pro') {
-      // Professional template - all fields required
-      if (!name || !email || !phone || !dob || !address || !links) return false;
+      if (!name || !jobTitle || !email || !phone || !dob || !address || !linkedin || !profile) return false;
+
+      if (!skills.every(skill => skill.trim() !== '')) return false;
 
       const checkArray = (arr, fields) =>
         arr.every(item => fields.every(field => item[field]?.trim() !== ''));
 
       const eduValid = checkArray(education, ['degree', 'institute', 'year']);
-      const expValid = checkArray(experience, ['role', 'company', 'duration']);
+      const expValid = experience.every(exp => (
+        exp.role.trim() !== '' &&
+        exp.company.trim() !== '' &&
+        exp.duration.trim() !== '' &&
+        exp.responsibilities.every(r => r.trim() !== '')
+      ));
       const projValid = checkArray(projects, ['title', 'description']);
+      if (!eduValid || !expValid || !projValid) return false;
 
-      return eduValid && expValid && projValid;
+      if (!links.trim()) return false;
+
+      return true;
     } else {
-      // Personal template - only essential fields required
+      // Personal template minimal validation
       if (!name || !email || !phone) return false;
-
-      // At least one education entry with degree and institute
       const hasEducation = education.some(edu => edu.degree?.trim() && edu.institute?.trim());
-      
-      // At least one project entry with title
       const hasProject = projects.some(proj => proj.title?.trim());
-
       return hasEducation && hasProject;
     }
   };
@@ -137,25 +170,26 @@ const ResumeForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isFormValid()) {
-      const message = template === 'pro' 
-        ? 'Please fill all required fields before generating the CV.'
-        : 'Please fill at least name, email, phone, one education entry, and one project entry.';
-      alert(message);
+      alert(template === 'pro' 
+        ? 'Please fill all required fields before generating the CV.' 
+        : 'Please fill at least name, email, phone, one education entry, and one project entry.');
       return;
     }
-
     setIsLoading(true);
-
     try {
-      // Save template type with form data
       const dataToSave = { ...formData, template };
 
-      // Clear optional fields for personal template if empty
       if (template === 'personal') {
+        // Clear optional fields if empty
         if (!dataToSave.dob) dataToSave.dob = '';
         if (!dataToSave.address) dataToSave.address = '';
         if (!dataToSave.links) dataToSave.links = '';
         if (!dataToSave.additionalInfo) dataToSave.additionalInfo = '';
+        if (!dataToSave.jobTitle) dataToSave.jobTitle = '';
+        if (!dataToSave.linkedin) dataToSave.linkedin = '';
+        if (!dataToSave.profile) dataToSave.profile = '';
+        if (!dataToSave.skills) dataToSave.skills = [''];
+
         // Remove empty experience entries
         dataToSave.experience = dataToSave.experience.filter(exp => 
           exp.role?.trim() || exp.company?.trim() || exp.duration?.trim()
@@ -163,13 +197,10 @@ const ResumeForm = () => {
       }
 
       localStorage.setItem('resumeData', JSON.stringify(dataToSave));
-
-      // Clear draft after successful save
       localStorage.removeItem('resumeDraft');
-
       alert('Resume data saved!');
       navigate(`/resume-builder/preview?template=${template}`);
-    } catch (error) {
+    } catch {
       alert('Error saving resume data. Please try again.');
     } finally {
       setIsLoading(false);
@@ -178,81 +209,69 @@ const ResumeForm = () => {
 
   const clearDraft = () => {
     if (window.confirm('Are you sure you want to clear all data? This cannot be undone.')) {
-      localStorage.removeItem('resumeDraft');
       setFormData({
         name: '',
+        jobTitle: '',
         email: '',
         phone: '',
         dob: '',
         address: '',
+        linkedin: '',
+        skills: [''],
+        profile: '',
         education: [{ degree: '', institute: '', year: '' }],
-        experience: [{ role: '', company: '', duration: '' }],
+        experience: [{ role: '', company: '', duration: '', responsibilities: [''] }],
         projects: [{ title: '', description: '' }],
         links: '',
         additionalInfo: '',
         photo: null,
       });
+      localStorage.removeItem('resumeDraft');
       setSaveStatus('Draft cleared!');
       setTimeout(() => setSaveStatus(''), 3000);
     }
   };
 
   const isFieldRequired = (field) => {
-    if (template === 'pro') {
-      // Professional template - all fields required
-      return true;
-    } else {
-      // Personal template - only essential fields required
-      const requiredFields = ['name', 'email', 'phone'];
-      return requiredFields.includes(field);
-    }
+    if (template === 'pro') return true;
+    return ['name', 'email', 'phone'].includes(field);
   };
 
   const isArrayFieldRequired = (section, field) => {
-    if (template === 'pro') {
-      // Professional template - all fields required
-      return true;
-    } else {
-      // Personal template - only essential fields required
-      if (section === 'education') {
-        return ['degree', 'institute'].includes(field);
-      } else if (section === 'projects') {
-        return field === 'title';
-      } else {
-        return false; // experience fields are optional for personal
-      }
-    }
+    if (template === 'pro') return true;
+    if (section === 'education') return ['degree', 'institute'].includes(field);
+    if (section === 'projects') return field === 'title';
+    return false;
   };
 
   return (
     <div className="resume-page">
       <div className="resume-form">
         <h2>📝 Resume Builder Form - {template === 'pro' ? 'Professional' : 'Personal'} Template</h2>
-        
-        <div style={{ 
-          background: template === 'pro' ? '#dcfce7' : '#fef3c7', 
-          color: template === 'pro' ? '#166534' : '#92400e',
-          padding: '1rem', 
-          borderRadius: '8px', 
-          marginBottom: '1rem',
-          border: `1px solid ${template === 'pro' ? '#22c55e' : '#f59e0b'}`
-        }}>
-          <strong>Template Info:</strong> {template === 'pro' 
+
+        <div
+          style={{
+            background: template === 'pro' ? '#dcfce7' : '#fef3c7',
+            color: template === 'pro' ? '#166534' : '#92400e',
+            padding: '1rem',
+            borderRadius: '8px',
+            marginBottom: '1rem',
+            border: `1px solid ${template === 'pro' ? '#22c55e' : '#f59e0b'}`,
+          }}
+        >
+          <strong>Template Info:</strong>{' '}
+          {template === 'pro'
             ? 'Professional template requires all fields for a comprehensive resume.'
-            : 'Personal template requires only essential fields for a simple, clean resume.'
-          }
+            : 'Personal template requires only essential fields for a simple, clean resume.'}
         </div>
 
-        {saveStatus && (
-          <div className="save-status">
-            {saveStatus}
-          </div>
-        )}
+        {saveStatus && <div className="save-status">{saveStatus}</div>}
 
         <form onSubmit={handleSubmit}>
           {/* Personal Info */}
           <section>
             <h3>👤 Personal Information</h3>
+
             <div className="form-group">
               <label htmlFor="name">Full Name *</label>
               <input
@@ -262,6 +281,18 @@ const ResumeForm = () => {
                 value={formData.name}
                 onChange={(e) => handleChange('name', e.target.value)}
                 required={isFieldRequired('name')}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="jobTitle">Job Title / Professional Title *</label>
+              <input
+                id="jobTitle"
+                type="text"
+                placeholder="e.g., Software Engineer"
+                value={formData.jobTitle}
+                onChange={(e) => handleChange('jobTitle', e.target.value)}
+                required={isFieldRequired('jobTitle')}
               />
             </div>
 
@@ -311,6 +342,65 @@ const ResumeForm = () => {
                 value={formData.address}
                 onChange={(e) => handleChange('address', e.target.value)}
                 required={isFieldRequired('address')}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="linkedin">LinkedIn Profile {template === 'pro' ? '*' : '(Optional)'}</label>
+              <input
+                id="linkedin"
+                type="url"
+                placeholder="https://linkedin.com/in/username"
+                value={formData.linkedin}
+                onChange={(e) => handleChange('linkedin', e.target.value)}
+                required={isFieldRequired('linkedin')}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Skills {template === 'pro' ? '*' : '(Optional)'}</label>
+              {formData.skills.map((skill, idx) => (
+                <div key={idx} className="skill-input-row">
+                  <input
+                    type="text"
+                    placeholder="Enter a skill"
+                    value={skill}
+                    onChange={(e) => {
+                      const newSkills = [...formData.skills];
+                      newSkills[idx] = e.target.value;
+                      setFormData({ ...formData, skills: newSkills });
+                    }}
+                    required={template === 'pro'}
+                  />
+                  {formData.skills.length > 1 && (
+                    <button
+                      type="button"
+                      className="btn-remove-small"
+                      onClick={() => {
+                        const newSkills = [...formData.skills];
+                        newSkills.splice(idx, 1);
+                        setFormData({ ...formData, skills: newSkills });
+                      }}
+                    >
+                      &times;
+                    </button>
+                  )}
+                </div>
+              ))}
+              <button type="button" className="btn-add" onClick={() => addSection('skills')}>
+                + Add Skill
+              </button>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="profile">Profile Summary {template === 'pro' ? '*' : '(Optional)'}</label>
+              <textarea
+                id="profile"
+                placeholder="Brief professional summary"
+                value={formData.profile}
+                onChange={(e) => handleChange('profile', e.target.value)}
+                rows="4"
+                required={isFieldRequired('profile')}
               />
             </div>
           </section>
@@ -411,6 +501,34 @@ const ResumeForm = () => {
                     onChange={(e) => handleArrayChange('experience', idx, 'duration', e.target.value)}
                     required={isArrayFieldRequired('experience', 'duration')}
                   />
+                </div>
+
+                {/* Responsibilities nested array */}
+                <div className="responsibilities-section">
+                  <label>Responsibilities {template === 'pro' ? '*' : '(Optional)'}</label>
+                  {item.responsibilities.map((resp, rIdx) => (
+                    <div key={rIdx} className="responsibility-row">
+                      <textarea
+                        placeholder="Describe responsibility or achievement"
+                        value={resp}
+                        onChange={(e) => handleNestedArrayChange('experience', idx, rIdx, e.target.value)}
+                        required={template === 'pro'}
+                        rows="2"
+                      />
+                      {item.responsibilities.length > 1 && (
+                        <button
+                          type="button"
+                          className="btn-remove-small"
+                          onClick={() => removeResponsibility(idx, rIdx)}
+                        >
+                          &times;
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                  <button type="button" className="btn-add" onClick={() => addResponsibility(idx)}>
+                    + Add Responsibility
+                  </button>
                 </div>
 
                 <div className="button-row">

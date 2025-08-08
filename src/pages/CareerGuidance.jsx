@@ -90,7 +90,7 @@ const CareerGuidance = () => {
   };
 
   return (
-    <div className="career-guidance-wrapper">
+    <div className="career-guidance-page career-guidance-wrapper">
       <h1 className="career-guidance-heading">AI Career Guidance</h1>
       <div className="career-guidance-main">
         <div className="guidance-image-section">
