@@ -24,13 +24,12 @@
 .guidance-image-section {
   width: 400px;
   height: 550px;
-  border: 3px dashed #81e6d9;
   border-radius: 0 2rem 0 2rem;
   overflow: hidden;
   box-shadow: 0 12px 45px rgba(129, 230, 217, 0.35);
   background-color: #0a1f1f;
   animation: fadePop 1.2s ease forwards;
-  opacity: 0;
+  opacity: 10;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
@@ -187,56 +186,25 @@
   border-radius: 1rem;
 }
 
-/* ✨ Animations */
-@keyframes fadePop {
-  0% {
-    opacity: 0;
-    transform: scale(0.9) translateY(40px);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
+/* 🌟 Guidance Importance + Pic13 side-by-side */
+.guidance-importance-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* 💚 Responsive */
-@media (max-width: 900px) {
-  .career-guidance-main {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .guidance-info-text {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .guidance-info-text img {
-    width: 100%;
-    max-width: 350px;
-  }
-}
-/* 🌟 Guidance Importance Styling */
 .guidance-importance-box {
   background: #103a3a;
   padding: 2rem 2.5rem;
   border-radius: 1.5rem;
   border: 2px solid #4ade80;
   box-shadow: 0 10px 30px rgba(74, 222, 128, 0.3);
-  margin-top: 2rem;
   color: #e0f2f1;
   animation: fadeInUp 1s ease forwards;
+  flex: 1;
 }
 
 .guidance-importance-box h3 {
@@ -280,4 +248,64 @@
 .guidance-importance-box li:hover {
   transform: translateY(-3px);
   background-color: #134e4a;
+}
+
+/* Pic13 Styling */
+.guidance-importance-image {
+  width: 350px;
+  height: auto;
+  border-radius: 1rem;
+  object-fit: cover;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* ✨ Animations */
+@keyframes fadePop {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 💚 Responsive */
+@media (max-width: 900px) {
+  .career-guidance-main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .guidance-info-text {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .guidance-info-text img {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .guidance-importance-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .guidance-importance-image {
+    width: 100%;
+    max-width: 350px;
+  }
 }

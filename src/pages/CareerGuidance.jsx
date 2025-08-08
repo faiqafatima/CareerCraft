@@ -176,10 +176,13 @@ const CareerGuidance = () => {
         )}
       </div>
 
+      {/* Updated section */}
       <div className="guidance-info-section">
         <div className="guidance-info-box">
           <img src="/src/assets/pic16.jpg" alt="Guidance Visual" />
-          <div className="guidance-info-text">
+
+          {/* New flex container for text (left) and Pic13 (right) */}
+          <div className="guidance-importance-container">
             <div className="guidance-importance-box">
               <h3>💬 Career Guidance Importance</h3>
               <p>
@@ -201,7 +204,12 @@ const CareerGuidance = () => {
                 <li>🛠️ Equips you with tools to make confident decisions</li>
               </ul>
             </div>
-            <img src="/src/assets/pic13.jpg" alt="Supportive Visual" />
+
+            <img
+              src="/src/assets/pic13.jpg"
+              alt="Career Guidance"
+              className="guidance-importance-image"
+            />
           </div>
         </div>
       </div>

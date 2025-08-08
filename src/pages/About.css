@@ -1,0 +1,131 @@
+/* Large White Heading */
+.about-main-heading {
+  font-size: 3rem;
+  font-weight: 800;
+  text-align: center;
+  color: white;
+  margin-bottom: 1rem;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Page padding */
+.about-page {
+  padding: 2rem 3rem;
+}
+
+/* Shift container slightly left */
+.about-hero-split {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  transform: translateX(-3%);
+}
+
+/* Image glow effect */
+.about-hero-image-glow {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.about-img-large {
+  width: 320px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 2rem;
+  border: 4px solid #22c55e;
+  box-shadow: 0 0 60px 0 #22c55e33, 0 8px 32px #16323533;
+  background: #fff;
+  z-index: 2;
+}
+
+.about-hero-image-glow::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, rgba(34,197,94,0.12) 0%, transparent 80%);
+  transform: translate(-50%, -50%);
+  filter: blur(24px);
+  z-index: 1;
+}
+
+/* Smooth fade and slide-in animation */
+.fade-slide-in {
+  animation: fadeSlideIn 1.2s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Offers grid */
+.about-offers-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.offer-card {
+  background: #fff;
+  color: var(--text-main);
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px #22c55e20;
+  padding: 1.2rem 1rem;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.offer-card:hover {
+  box-shadow: 0 4px 24px #22c55e40;
+  transform: translateY(-4px) scale(1.02);
+}
+
+/* Pic10 styling */
+.pic10-wrapper {
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.pic10-img {
+  width: 280px;
+  height: auto;
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px rgba(34, 197, 94, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pic10-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 40px rgba(34, 197, 94, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .about-hero-split {
+    flex-direction: column;
+    transform: translateX(0);
+    gap: 2rem;
+  }
+  
+  .about-img-large {
+    width: 90vw;
+    height: auto;
+    max-width: 320px;
+  }
+  
+  .about-offers-grid {
+    grid-template-columns: 1fr;
+  }
+}

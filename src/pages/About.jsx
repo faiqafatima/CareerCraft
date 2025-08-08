@@ -1,25 +1,35 @@
 import React from 'react';
-import '../App.css'; // For global theme
-import './PageStyles.css'; // For page-specific styles
+import '../App.css';
+import './About.css';
 
 const About = () => {
   return (
     <div className="themed-page about-page">
+      {/* Heading Outside Card */}
+      <h1 className="about-main-heading">About CareerCraft</h1>
+
       <div className="about-hero-split">
-        <div className="about-hero-image-glow">
-          <img src="/src/assets/about_us.jpg" alt="About CareerCraft - Professional Team" className="about-img-large" />
+        {/* Left Side Image with Animation */}
+        <div className="about-hero-image-glow fade-slide-in">
+          <img
+            src="/src/assets/pic12.webp"
+            alt="Team working together"
+            className="about-img-large"
+          />
         </div>
+
+        {/* Right Side Content in Card */}
         <div className="about-content card-style">
-          <h1 className="themed-heading">About CareerCraft</h1>
           <div className="about-section">
             <h2 className="themed-subheading">Our Mission</h2>
             <p>
-              CareerCraft is an AI-powered career development platform designed to help professionals and students 
-              navigate their career journey with confidence. We combine cutting-edge artificial intelligence with 
-              proven career development strategies to provide personalized guidance, job recommendations, and 
+              CareerCraft is an AI-powered career development platform designed to help professionals and students
+              navigate their career journey with confidence. We combine cutting-edge artificial intelligence with
+              proven career development strategies to provide personalized guidance, job recommendations, and
               interview preparation.
             </p>
           </div>
+
           <div className="about-section">
             <h2 className="themed-subheading">What We Offer</h2>
             <div className="about-offers-grid">
@@ -41,14 +51,16 @@ const About = () => {
               </div>
             </div>
           </div>
+
           <div className="about-section">
             <h2 className="themed-subheading">Our Technology</h2>
             <p>
-              Powered by Google's Gemini AI, our platform provides intelligent, context-aware responses that 
-              understand your unique background and career aspirations. We continuously improve our AI models 
+              Powered by Google's Gemini AI, our platform provides intelligent, context-aware responses that
+              understand your unique background and career aspirations. We continuously improve our AI models
               to deliver more accurate and helpful career guidance.
             </p>
           </div>
+
           <div className="about-section">
             <h2 className="themed-subheading">Why Choose CareerCraft?</h2>
             <ul>
@@ -59,6 +71,16 @@ const About = () => {
               <li><strong>Secure & Private:</strong> Your data is protected and never shared</li>
             </ul>
           </div>
+
+          {/* Stylish Image Box for pic10 */}
+          <div className="pic10-wrapper">
+            <img
+              src="/src/assets/pic10.jpg"
+              alt="Career growth illustration"
+              className="pic10-img"
+            />
+          </div>
+
           <div className="about-section about-cta card-style fade-in">
             <h3>Ready to Transform Your Career?</h3>
             <p>Join thousands of professionals who have already discovered their dream careers with CareerCraft.</p>
@@ -70,4 +92,3 @@ const About = () => {
 };
 
 export default About;
-
