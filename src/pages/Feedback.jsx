@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import '../App.css';
 import './Feedback.css';
 
+import pic18 from '../assets/pic18.webp';
+import pic19 from '../assets/pic19.jpg';
+import emoji from '../assets/emoji.avif';
+import pic20 from '../assets/pic20.webp';
+
 const Feedback = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -46,13 +51,13 @@ const Feedback = () => {
       <div className="feedback-hero-split">
         {/* Left Image */}
         <div className="feedback-left-image">
-          <img src="/src/assets/pic18.webp" alt="We want your feedback" />
+          <img src={pic18} alt="We want your feedback" />
         </div>
 
         {/* Feedback Box */}
         <div className="feedback-content card-style">
           <div className="feedback-top-image">
-            <img src="/src/assets/pic19.jpg" alt="Feedback banner" />
+            <img src={pic19} alt="Feedback banner" />
           </div>
 
           <p className="themed-subheading">
@@ -129,11 +134,7 @@ const Feedback = () => {
 
                 {/* Right column - emoji image */}
                 <div className="emoji-image-container">
-                  <img
-                    src="/src/assets/emoji.avif"
-                    alt="Emoji"
-                    className="emoji-img"
-                  />
+                  <img src={emoji} alt="Emoji" className="emoji-img" />
                 </div>
               </div>
             </form>
@@ -150,11 +151,7 @@ const Feedback = () => {
                 <li>Enhance our career guidance tools</li>
               </ul>
             </div>
-            <img
-              src="/src/assets/pic20.webp"
-              alt="Feedback mascot"
-              className="pic20"
-            />
+            <img src={pic20} alt="Feedback mascot" className="pic20" />
           </div>
         </div>
       </div>

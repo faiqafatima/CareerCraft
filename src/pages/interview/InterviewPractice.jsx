@@ -3,9 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import Interview from '../../api/Interview';
 import useAuthStore from '../../store/authStore';
 import '../../App.css';
-import '../PageStyles.css';
+// import '../PageStyles.css';
 import './InterviewPractice.css';
-import AI from '../../assets/AI.png'; // ✅ AI Avatar
+
+import AI from '../../assets/AI.png';           // AI Avatar
+import interviewPic from '../../assets/pic5.jpg';  // Interview Practice Image
+// (You mentioned 3 images, but I only see these two image imports. If there is a third image in code please share.)
 
 const InterviewPractice = () => {
   const navigate = useNavigate();
@@ -75,7 +78,7 @@ const InterviewPractice = () => {
       <div className="interview-hero-split custom-layout">
         <div className="interview-hero-image-glow">
           <img
-            src="/src/assets/pic5.jpg"
+            src={interviewPic}
             alt="Interview Practice"
             className="interview-img-large"
           />

@@ -5,6 +5,12 @@ import useAuthStore from '../store/authStore';
 import ReactMarkdown from 'react-markdown'; // For markdown formatting
 import './CareerGuidance.css';
 
+// Import images from assets folder
+import pic17 from '../assets/pic17.webp';
+import pic14 from '../assets/pic14.jpeg';
+import pic16 from '../assets/pic16.jpg';
+import pic13 from '../assets/pic13.jpg';
+
 const CareerGuidance = () => {
   const navigate = useNavigate();
   const { isLoggedIn, user } = useAuthStore(); // get user from store
@@ -99,18 +105,10 @@ Keep tone motivational, practical, and specific. Only give one focused career pa
       <h1 className="career-guidance-heading">AI Career Guidance</h1>
       <div className="career-guidance-main">
         <div className="guidance-image-section">
-          <img
-            src="/src/assets/pic17.webp"
-            alt="Side Visual"
-            className="guidance-img-large"
-          />
+          <img src={pic17} alt="Side Visual" className="guidance-img-large" />
         </div>
         <div className="guidance-ai-container">
-          <img
-            src="/src/assets/pic14.jpeg"
-            alt="Top Visual"
-            className="guidance-ai-image"
-          />
+          <img src={pic14} alt="Top Visual" className="guidance-ai-image" />
           <form onSubmit={handleGuidance} className="guidance-form-group">
             <label htmlFor="skills">Skills</label>
             <input
@@ -180,7 +178,7 @@ Keep tone motivational, practical, and specific. Only give one focused career pa
 
       <div className="guidance-info-section">
         <div className="guidance-info-box">
-          <img src="/src/assets/pic16.jpg" alt="Guidance Visual" />
+          <img src={pic16} alt="Guidance Visual" />
           <div className="guidance-importance-container">
             <div className="guidance-importance-box">
               <h3>💬 Career Guidance Importance</h3>
@@ -199,7 +197,7 @@ Keep tone motivational, practical, and specific. Only give one focused career pa
               </ul>
             </div>
             <img
-              src="/src/assets/pic13.jpg"
+              src={pic13}
               alt="Career Guidance"
               className="guidance-importance-image"
             />

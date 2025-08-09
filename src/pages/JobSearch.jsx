@@ -6,6 +6,10 @@ import useAuthStore from '../store/authStore';
 import '../App.css';
 import './JobSearch.css';
 
+import pic7 from '../assets/pic7.avif';
+import pic8 from '../assets/pic8.webp';
+import pic6 from '../assets/pic6.jpeg';
+
 const JobSearch = () => {
   const navigate = useNavigate();
   const { isLoggedIn } = useAuthStore();
@@ -98,17 +102,17 @@ const JobSearch = () => {
         {/* 💚 Side Images Stacked */}
         <div className="side-images-container">
           <div className="side-image">
-            <img src="/src/assets/pic7.avif" alt="Image 1" />
+            <img src={pic7} alt="Image 1" />
           </div>
           <div className="side-image">
-            <img src="/src/assets/pic8.webp" alt="Image 2" />
+            <img src={pic8} alt="Image 2" />
           </div>
         </div>
 
         {/* 💻 Form and Results Section */}
         <div className="jobsearch-form-container card-style">
           <img
-            src="/src/assets/pic6.jpeg"
+            src={pic6}
             alt="Job Search Visual"
             className="top-image"
           />

@@ -2,6 +2,9 @@ import React from 'react';
 import '../App.css';
 import './About.css';
 
+import pic12 from '../assets/pic12.webp';
+import pic10 from '../assets/pic10.jpg';
+
 const About = () => {
   return (
     <div className="themed-page about-page">
@@ -12,7 +15,7 @@ const About = () => {
         {/* Left Side Image with Animation */}
         <div className="about-hero-image-glow fade-slide-in">
           <img
-            src="/src/assets/pic12.webp"
+            src={pic12}
             alt="Team working together"
             className="about-img-large"
           />
@@ -104,7 +107,7 @@ const About = () => {
           {/* Stylish Image Box for pic10 */}
           <div className="pic10-wrapper">
             <img
-              src="/src/assets/pic10.jpg"
+              src={pic10}
               alt="Career growth illustration"
               className="pic10-img"
             />
