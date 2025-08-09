@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import "./HeroSection.css";
+import heroImage from '../assets/hero.jpg';  // <-- import your image here
 
 const HeroSection = () => {
   const navigate = useNavigate();
@@ -21,8 +22,9 @@ const HeroSection = () => {
   return (
     <section className="hero">
       <div className="hero-left">
-        <h1>  <span className="white-text">Build Your Career with </span>
-  <span className="green-text">AI</span>
+        <h1>
+          <span className="white-text">Build Your Career with </span>
+          <span className="green-text">AI</span>
         </h1>
         <p>
           Leverage the power of artificial intelligence to create standout resumes,
@@ -35,7 +37,7 @@ const HeroSection = () => {
       </div>
       <div className="hero-right">
         <img
-          src="src/assets/hero.jpg"
+          src={heroImage}  // <-- use imported image here
           alt="AI Career Illustration"
         />
       </div>
@@ -44,4 +46,3 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-

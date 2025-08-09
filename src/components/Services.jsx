@@ -2,35 +2,41 @@ import React from 'react';
 import './Services.css';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
-import pic9 from '../assets/pic9.png'; // ✅ make sure image path is correct
+import pic9 from '../assets/pic9.png'; // ✅ correct import for side image
+
+// Import all service images properly
+import cvImage from '../assets/cv.png';
+import interviewImage from '../assets/interview.jpeg';
+import jobImage from '../assets/job.jpg';
+import careerImage from '../assets/career.jpeg';
 
 const services = [
   {
     icon: '📄',
     title: 'Resume Builder',
     description: 'Create professional resumes with AI-powered suggestions',
-    image: 'src/assets/cv.png',
+    image: cvImage,  // <-- imported image variable here
     link: '/resume-builder',
   },
   {
     icon: '🎤',
     title: 'AI Interview Practice',
     description: 'Practice interviews with our intelligent AI coach',
-    image: 'src/assets/interview.jpeg',
+    image: interviewImage,
     link: '/interview-practice',
   },
   {
     icon: '🔍',
     title: 'Job Search',
     description: 'Find opportunities tailored to your skills and goals',
-    image: 'src/assets/job.jpg',
+    image: jobImage,
     link: '/job-search',
   },
   {
     icon: '🎯',
     title: 'Career Guidance',
     description: 'Get personalized roadmaps for your career journey',
-    image: 'src/assets/career.jpeg',
+    image: careerImage,
     link: '/career-guidance',
   },
 ];
