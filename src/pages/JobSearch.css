@@ -34,28 +34,28 @@
   animation: fadeInUp 1s ease forwards;
 }
 
-/* 💚 First Image – Emerald glow, angular */
+/* 💙 First Image – Teal glow, angular */
 .jobsearch-page .side-image:first-child {
   width: 400px;
   height: 550px;
-  border: 4px solid #34d399;
+  border: 4px solid #20b2aa;
   border-radius: 2rem 0 2rem 0;
   overflow: hidden;
-  box-shadow: 0 12px 45px rgba(52, 211, 153, 0.45);
+  box-shadow: 0 12px 45px rgba(32, 178, 170, 0.45);
   background-color: #0f2e2d;
   animation: fadePop 1s ease forwards;
   opacity: 0;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-/* 🩵 Second Image – Dashed glow, different shape */
+/* 💙 Second Image – Dashed teal glow */
 .jobsearch-page .side-image:last-child {
   width: 400px;
   height: 550px;
-  border: 3px dashed #81e6d9;
+  border: 3px dashed #40e0d0;
   border-radius: 0 2rem 0 2rem;
   overflow: hidden;
-  box-shadow: 0 12px 45px rgba(129, 230, 217, 0.35);
+  box-shadow: 0 12px 45px rgba(64, 224, 208, 0.35);
   background-color: #0a1f1f;
   animation: fadePop 1.2s ease forwards;
   opacity: 0;
@@ -74,7 +74,7 @@
 /* ✨ Hover Effects */
 .jobsearch-page .side-image:hover {
   transform: scale(1.04);
-  box-shadow: 0 20px 50px rgba(0, 255, 190, 0.5);
+  box-shadow: 0 20px 50px rgba(64, 224, 208, 0.5);
 }
 
 .jobsearch-page .side-image img:hover {
@@ -86,7 +86,7 @@
 .jobsearch-page .jobsearch-form-container {
   flex: 1;
   background: #0f2e2d;
-  border: 2px solid #81e6d9;
+  border: 2px solid #40e0d0;
   padding: 2rem;
   border-radius: 1.5rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
@@ -118,7 +118,7 @@
 .jobsearch-page .form-group input {
   padding: 0.6rem;
   border-radius: 0.5rem;
-  border: 1px solid #6ee7b7;
+  border: 1px solid #40e0d0;
   outline: none;
   background: #f0fdf4;
   color: #0f172a;
@@ -133,7 +133,7 @@
 
 .jobsearch-page .themed-btn {
   padding: 0.6rem 1.2rem;
-  background-color: #34d399;
+  background-color: #20b2aa;
   border: none;
   border-radius: 0.5rem;
   color: #0f172a;
@@ -143,7 +143,7 @@
 }
 
 .jobsearch-page .themed-btn:hover {
-  background-color: #10b981;
+  background-color: #1ca59f;
 }
 
 .jobsearch-page .themed-btn.secondary {
@@ -169,7 +169,7 @@
 
 .jobsearch-page .result-card {
   background: #1b3e3d;
-  border: 1px solid #4ade80;
+  border: 1px solid #20b2aa;
   padding: 1rem;
   border-radius: 1rem;
   margin-bottom: 1rem;
@@ -221,7 +221,7 @@
   }
 }
 
-/* 💚 Responsive Design */
+/* 💙 Responsive Design */
 @media (max-width: 900px) {
   .jobsearch-page .jobsearch-layout {
     flex-direction: column;

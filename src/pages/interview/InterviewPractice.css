@@ -20,7 +20,8 @@
   max-width: 600px;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 0 20px rgba(34, 197, 156, 0.3); /* soft teal shadow */
+  /* updated teal-blue shadow */
+  box-shadow: 0 0 20px rgba(20, 184, 166, 0.3); /* soft teal-blue shadow */
 }
 
 .interview-img-large {
@@ -29,6 +30,8 @@
   display: block;
   object-fit: cover;
   border-radius: 12px;
+  /* added teal-blue border */
+  border: 4px solid #14b8a6;
 }
 
 /* === INTERVIEW CARD === */

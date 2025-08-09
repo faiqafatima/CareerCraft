@@ -68,6 +68,7 @@ const Feedback = () => {
           ) : (
             <form onSubmit={handleSubmit} className="feedback-form">
               <div className="form-inputs-section">
+                {/* Left column - form fields */}
                 <div className="form-fields">
                   <div className="form-group">
                     <label htmlFor="name">Name *</label>
@@ -108,6 +109,7 @@ const Feedback = () => {
                         : 'Click to rate'}
                     </small>
                   </div>
+
                   <div className="form-group">
                     <label htmlFor="feedback">Your Feedback *</label>
                     <textarea
@@ -125,25 +127,19 @@ const Feedback = () => {
                   </button>
                 </div>
 
-                {/* Side Images */}
-                <div className="feedback-side-image">
-                  {/* pic20 hidden here by CSS */}
+                {/* Right column - emoji image */}
+                <div className="emoji-image-container">
                   <img
-                    src="/src/assets/pic20.webp"
-                    alt="Logo"
-                    className="pic20"
-                  />
-                  <img
-                    src="/src/assets/pic21.avif"
-                    alt="Extra Logo"
-                    className="pic21"
+                    src="/src/assets/emoji.avif"
+                    alt="Emoji"
+                    className="emoji-img"
                   />
                 </div>
               </div>
             </form>
           )}
 
-          {/* Moved pic20 here next to text */}
+          {/* Info Box */}
           <div className="feedback-info-box card-style fade-in">
             <div>
               <h3>What We Do With Your Feedback</h3>

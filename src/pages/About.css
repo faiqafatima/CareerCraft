@@ -3,7 +3,7 @@
   font-size: 3rem;
   font-weight: 800;
   text-align: center;
-  color: white;
+  color: #ffffff; /* pure white */
   margin-bottom: 1rem;
   text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
@@ -13,7 +13,7 @@
   padding: 2rem 3rem;
 }
 
-/* Shift container slightly left */
+/* Split container */
 .about-hero-split {
   width: 100%;
   display: flex;
@@ -37,8 +37,8 @@
   height: 320px;
   object-fit: cover;
   border-radius: 2rem;
-  border: 4px solid #22c59c; /* updated main green */
-  box-shadow: 0 0 60px 0 #22c59c33, 0 8px 32px #16323533; /* updated shadow */
+  border: 4px solid #14b8a6; /* teal-blue border */
+  box-shadow: 0 0 60px 0 #14b8a633, 0 8px 32px #16323533;
   background: #fff;
   z-index: 2;
 }
@@ -52,12 +52,18 @@
   height: 360px;
   background: radial-gradient(
     circle,
-    rgba(34, 197, 156, 0.12) 0%,
+    rgba(20, 184, 166, 0.12) 0%,
     transparent 80%
-  ); /* updated rgba for new green */
+  ); /* teal-blue glow */
   transform: translate(-50%, -50%);
   filter: blur(24px);
   z-index: 1;
+}
+
+/* Shift content slightly left */
+.about-content {
+  flex: 1;
+  margin-left: -1.5rem;
 }
 
 /* Smooth fade and slide-in animation */
@@ -86,13 +92,13 @@
   background: #fff;
   color: var(--text-main);
   border-radius: 1rem;
-  box-shadow: 0 2px 12px #22c59c20; /* updated main green */
+  box-shadow: 0 2px 12px #14b8a620; /* teal-blue shadow */
   padding: 1.2rem 1rem;
   transition: box-shadow 0.2s, transform 0.2s;
 }
 
 .offer-card:hover {
-  box-shadow: 0 4px 24px #033d33; /* updated hover dark green */
+  box-shadow: 0 4px 24px #0f766e; /* darker teal hover */
   transform: translateY(-4px) scale(1.02);
 }
 
@@ -106,13 +112,13 @@
   width: 280px;
   height: auto;
   border-radius: 1rem;
-  box-shadow: 0 8px 32px rgba(34, 197, 156, 0.3); /* updated main green */
+  box-shadow: 0 8px 32px rgba(20, 184, 166, 0.3); /* teal-blue */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .pic10-img:hover {
   transform: scale(1.05);
-  box-shadow: 0 12px 40px #033d33; /* updated hover dark green */
+  box-shadow: 0 12px 40px #0f766e; /* darker teal hover */
 }
 
 /* Responsive */
@@ -131,5 +137,9 @@
 
   .about-offers-grid {
     grid-template-columns: 1fr;
+  }
+
+  .about-content {
+    margin-left: 0; /* remove left shift on mobile */
   }
 }

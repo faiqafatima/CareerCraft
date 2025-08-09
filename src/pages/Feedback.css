@@ -35,6 +35,35 @@
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35), 0 0 50px rgba(34, 197, 94, 0.35);
 }
 
+/* ===== Emoji Image Container (emoji.avif) ===== */
+.emoji-image-container {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0.5rem; /* reduced padding */
+  margin: 0.5rem auto 1rem auto; /* smaller margins, centered horizontally */
+  max-width: 320px; /* same max width as image */
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+
+.emoji-image-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 1.5rem;
+  box-shadow: none !important;
+  filter: none !important;
+  transition: transform 0.4s ease;
+  display: block;
+}
+
+.emoji-image-container img:hover {
+  transform: scale(1.03);
+  box-shadow: none !important;
+}
+
 /* Feedback Content Box */
 .feedback-content {
   flex: 1;
@@ -190,7 +219,7 @@
     max-width: 100%;
   }
 
-  .feedback-side-image img.pic21 {
+  .feedback-side-image img.pic18 {
     width: 600px;
     height: 100px;
   }
@@ -198,5 +227,11 @@
   .feedback-info-box img.pic20 {
     width: 100px;
     height: 100px;
+  }
+
+  .emoji-image-container {
+    max-width: 90vw;
+    padding: 0.8rem 0.5rem;
+    margin: 0.5rem auto 1rem auto;
   }
 }

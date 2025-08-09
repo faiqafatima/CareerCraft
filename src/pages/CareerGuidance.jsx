@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Interview from '../api/Interview';
 import useAuthStore from '../store/authStore';
+import ReactMarkdown from 'react-markdown'; // For markdown formatting
 import './CareerGuidance.css';
 
 const CareerGuidance = () => {
   const navigate = useNavigate();
-  const { isLoggedIn } = useAuthStore();
+  const { isLoggedIn, user } = useAuthStore(); // get user from store
+  const userName = user?.name || user?.displayName || 'User'; // fallback
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -18,74 +20,77 @@ const CareerGuidance = () => {
   const [skills, setSkills] = useState('');
   const [interests, setInterests] = useState('');
   const [degree, setDegree] = useState('');
-  const [results, setResults] = useState([]);
+  const [roadmap, setRoadmap] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
   if (!isLoggedIn) return null;
 
+  // Prompt builder (Markdown format)
   const buildPrompt = () =>
-    `Given these skills: ${skills || 'N/A'}, interests: ${
-      interests || 'N/A'
-    }, and degree: ${
-      degree || 'N/A'
-    }, suggest 3-5 suitable career paths. For each, give:\n1. Career Path Name\n2. 1-2 sentence summary\n3. 2-3 actionable steps to get started.\nKeep it concise and professional. Format as a numbered list. Do not ask questions, just list careers as requested.`;
+    `You are a professional career counselor. 
+Given these details: 
+- Name: ${userName}
+- Skills: ${skills || 'N/A'} 
+- Interests: ${interests || 'N/A'} 
+- Degree: ${degree || 'N/A'}
 
-  const parseCareers = (response) => {
-    const careers = response.split(/\n\s*\d+\.\s*/).filter(Boolean);
-    return careers.map((career) => {
-      const [nameLine, ...rest] = career.split(/\n/);
-      let name = nameLine;
-      let summary = '';
-      let steps = [];
-      rest.forEach((line) => {
-        if (/step|start|begin|how to|action/i.test(line))
-          steps.push(line.trim());
-        else summary += line + ' ';
-      });
-      if (steps.length === 0) {
-        const match = summary.match(/(\d+\.|[-*\u2022])\s?(.+)/g);
-        if (match) {
-          steps = match.map((s) =>
-            s.replace(/(\d+\.|[-*\u2022])\s?/, '').trim()
-          );
-          summary = summary.replace(/(\d+\.|[-*\u2022])\s?(.+)/g, '').trim();
-        }
-      }
-      return {
-        name: name?.replace(/^[-*\u2022]?\s*/, '').trim(),
-        summary: summary.trim(),
-        steps,
-      };
-    });
-  };
+Create a complete career roadmap for the user’s professional growth.
 
-  const handleGuidance = async (e) => {
-    if (e) e.preventDefault();
-    if (!skills.trim() && !interests.trim() && !degree.trim()) {
-      setError('Please enter your skills, interests, or degree.');
-      return;
-    }
+**Formatting rules (VERY IMPORTANT)**:
+- Use markdown syntax only, not HTML.
+- Start with a title like: 📑 **${userName} – ${degree || 'Degree'} + ${
+      skills || 'Skills'
+    } + ${interests || 'Interests'}**
+- Make section headings bold (**Heading**) or use markdown headings (## Heading).
+- Use bullet points for lists.
+- Keep it neat and easy to read.
+
+Roadmap must include:
+1. **Goal** (short sentence)
+2. **Learning Focus**
+3. **Projects**
+4. **Certifications**
+5. **Future Role, Job Markets, and Expected Salary**
+
+Keep tone motivational, practical, and specific. Only give one focused career path.`;
+
+  // Get roadmap from AI
+  const getRoadmap = async () => {
     setError('');
     setIsLoading(true);
-    setResults([]);
+    setRoadmap('');
     const prompt = buildPrompt();
     try {
       const aiResponse = await Interview(prompt);
-      setResults(parseCareers(aiResponse));
+      setRoadmap(aiResponse.trim());
     } catch {
-      setResults([]);
       setError('Something went wrong while fetching career guidance.');
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleClear = () => {
+  const handleGuidance = (e) => {
+    if (e) e.preventDefault();
+    if (!skills.trim() && !interests.trim() && !degree.trim()) {
+      setError('Please enter your skills, interests, or degree.');
+      return;
+    }
+    getRoadmap();
+  };
+
+  // Clears and reloads new roadmap without clearing inputs
+  const handleClearAndRegenerate = () => {
+    getRoadmap();
+  };
+
+  // Clears everything
+  const handleClearAll = () => {
     setSkills('');
     setInterests('');
     setDegree('');
-    setResults([]);
+    setRoadmap('');
     setError('');
   };
 
@@ -139,10 +144,18 @@ const CareerGuidance = () => {
               <button
                 type="button"
                 className="themed-btn secondary"
-                onClick={handleClear}
+                onClick={handleClearAndRegenerate}
+                disabled={isLoading || !roadmap}
+              >
+                New Roadmap
+              </button>
+              <button
+                type="button"
+                className="themed-btn danger"
+                onClick={handleClearAll}
                 disabled={isLoading}
               >
-                Clear
+                Clear All
               </button>
             </div>
           </form>
@@ -155,56 +168,36 @@ const CareerGuidance = () => {
             AI is preparing your career roadmap...
           </div>
         )}
-        {results.length > 0 && (
-          <div className="results-list">
-            {results.map((career, idx) => (
-              <div key={idx} className="chat-bubble">
-                <div className="result-title">
-                  {career.name || `Career ${idx + 1}`}
-                </div>
-                <div className="result-summary">{career.summary}</div>
-                {career.steps && career.steps.length > 0 && (
-                  <ul className="result-steps">
-                    {career.steps.map((step, i) => (
-                      <li key={i}>{step}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            ))}
+        {roadmap && (
+          <div className="roadmap-container">
+            <h2>Your Personalized Career Roadmap</h2>
+            <div className="roadmap-text">
+              <ReactMarkdown>{roadmap}</ReactMarkdown>
+            </div>
           </div>
         )}
       </div>
 
-      {/* Updated section */}
       <div className="guidance-info-section">
         <div className="guidance-info-box">
           <img src="/src/assets/pic16.jpg" alt="Guidance Visual" />
-
-          {/* New flex container for text (left) and Pic13 (right) */}
           <div className="guidance-importance-container">
             <div className="guidance-importance-box">
               <h3>💬 Career Guidance Importance</h3>
               <p>
                 The right guidance at the right time can change everything.
                 AI-powered tools don't just give advice — they create
-                personalized roadmaps built around <em>you</em>. Your dreams,
-                your skills, your future.
+                personalized roadmaps built around <em>you</em>.
               </p>
               <ul>
-                <li>📍 Identifies your strengths and areas of improvement</li>
-                <li>
-                  🧠 Recommends tailored career paths based on your profile
-                </li>
-                <li>
-                  💼 Matches you with industry-relevant roles and skill sets
-                </li>
-                <li>🚀 Helps you stay ahead of job market trends</li>
-                <li>🔍 Gives clarity for short- and long-term goals</li>
-                <li>🛠️ Equips you with tools to make confident decisions</li>
+                <li>📍 Identifies your strengths</li>
+                <li>🧠 Recommends tailored career paths</li>
+                <li>💼 Matches with industry-relevant roles</li>
+                <li>🚀 Keeps you ahead of trends</li>
+                <li>🔍 Gives short & long-term clarity</li>
+                <li>🛠️ Helps make confident decisions</li>
               </ul>
             </div>
-
             <img
               src="/src/assets/pic13.jpg"
               alt="Career Guidance"
