@@ -4,3 +4,131 @@
   background-color: #ffffff;
   color: #333333;
 } */
+/* ===== Base Styles ===== */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+  background-color: #ffffff;
+  color: #333333;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Make all images responsive */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Default container handling */
+.container,
+.section-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ===== Mobile First (Up to 600px) ===== */
+@media (max-width: 600px) {
+  .container,
+  .section-container {
+    padding: 10px;
+    flex-direction: column !important;
+  }
+
+  h1, h2, h3 {
+    font-size: 1.5rem !important;
+    text-align: center;
+  }
+
+  p {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  button,
+  .btn {
+    width: 100% !important;
+    padding: 12px !important;
+    font-size: 1rem !important;
+  }
+
+  form {
+    width: 100% !important;
+  }
+  input, textarea, select {
+    width: 100% !important;
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .card,
+  .service-box {
+    width: 100% !important;
+    margin-bottom: 15px;
+  }
+
+  .hero-image,
+  .home-image,
+  .side-image {
+    width: 100% !important;
+    margin: 0 auto;
+  }
+
+  .feedback-image {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+}
+
+/* ===== Tablets (601px - 1024px) ===== */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .container,
+  .section-container {
+    padding: 15px;
+    flex-direction: column;
+  }
+
+  h1, h2, h3 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  p {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .card,
+  .service-box {
+    width: 48% !important;
+    margin: 1%;
+  }
+
+  .hero-image,
+  .home-image,
+  .side-image {
+    width: 90% !important;
+    margin: 0 auto;
+  }
+}
+
+/* ===== Desktops (1025px and up) ===== */
+@media (min-width: 1025px) {
+  .container,
+  .section-container {
+    max-width: 1200px;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+}

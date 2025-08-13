@@ -136,3 +136,68 @@
 .dropdown-menu li:hover {
   background-color: rgba(79, 188, 156, 0.2);
 }
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap;
+    padding: 12px 20px;
+  }
+
+  .navbar-left {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .navbar-right {
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    align-items: center;
+  }
+
+  .navbar-links {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .navbar-links li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .register-btn {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  /* Make dropdown menu appear on top for mobile */
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    background: none;
+    padding: 0;
+    min-width: unset;
+  }
+
+  .dropdown-menu li {
+    padding: 6px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-brand {
+    font-size: 20px;
+  }
+
+  .navbar-links li a,
+  .dropdown-label {
+    font-size: 14px;
+  }
+
+  .register-btn {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
